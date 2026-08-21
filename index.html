@@ -3,27 +3,14 @@
 
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <meta
-    name="description"
-    content="A special question for someone special ❤️"
-  >
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A special question for someone special ❤️">
   <title>For Van Srey Keav ❤️</title>
 
   <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- CSS -->
   <link rel="stylesheet" href="style.css">
@@ -31,142 +18,67 @@
 
 <body>
 
-  <!-- =========================================
-       BACKGROUND
-  ========================================== -->
-
+  <!-- Background -->
   <div class="background">
-
     <div class="gradient gradient-1"></div>
-
     <div class="gradient gradient-2"></div>
-
     <div class="noise"></div>
-
   </div>
 
-
-  <!-- =========================================
-       FLOATING BACKGROUND HEARTS
-  ========================================== -->
-
-  <div
-    class="floating-hearts"
-    aria-hidden="true"
-  >
-
+  <!-- Floating hearts -->
+  <div class="floating-hearts" aria-hidden="true">
     <span>♡</span>
     <span>♡</span>
     <span>♡</span>
     <span>♡</span>
     <span>♡</span>
-
   </div>
 
-
-  <!-- =========================================
-       MAIN
-  ========================================== -->
-
+  <!-- ==============================
+       QUESTION
+  =============================== -->
   <main class="page">
 
-    <!-- =======================================
-         QUESTION CARD
-    ======================================== -->
+    <section class="card question-card" aria-label="Love question">
 
-    <section
-      class="card question-card"
-      aria-label="Love question"
-    >
-
-      <!-- Main Video -->
-
+      <!-- Media -->
       <div class="media">
-
-        <video
-          class="main-video"
-          src="202602011711 (3).mp4"
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="auto"
-        ></video>
-
+        <video class="main-video" src="202602011711 (3).mp4" autoplay muted loop playsinline></video>
       </div>
-
 
       <!-- Heart -->
-
-      <div class="heart">
-        ♥
-      </div>
-
-
-      <!-- Eyebrow -->
+      <div class="heart">♥</div>
 
       <p class="eyebrow">
         A little question for you
       </p>
 
-
-      <!-- Title -->
-
       <h1>
         Do you love me?
       </h1>
-
-
-      <!-- Name -->
 
       <h2>
         Van Srey Keav
       </h2>
 
-
-      <!-- Description -->
-
       <p class="description">
-
         There is only one question...
         <br>
-
         but your answer means a lot. ❤️
-
       </p>
 
-
-      <!-- =====================================
-           BUTTONS
-      ====================================== -->
-
+      <!-- Buttons -->
       <div class="actions">
-
-        <button
-          class="button button-yes js-yes"
-          type="button"
-        >
-
+        <button class="button button-yes js-yes" type="button">
           <span>Yes</span>
-
           <span>♥</span>
-
         </button>
 
-
-        <button
-          class="button button-no js-no"
-          type="button"
-        >
-
+        <button class="button button-no js-no" type="button">
           <span>No</span>
-
           <span>×</span>
-
         </button>
-
       </div>
-
 
       <p class="hint">
         Choose wisely ✨
@@ -174,114 +86,59 @@
 
     </section>
 
-
-
-    <!-- =======================================
-         SUCCESS CARD
-    ======================================== -->
-
-    <section
-      class="card success-card"
-      aria-label="Love result"
-    >
-
-      <!-- Result Video -->
+    <!-- ==============================
+         SUCCESS
+    =============================== -->
+    <section class="card success-card" aria-label="Love result">
 
       <div class="media success-media">
-
-        <video
-          class="result-video"
-          src="Love.mp4"
-          loop
-          playsinline
-          preload="auto"
-        ></video>
-
+        <video class="result-video" src="Love.mp4" loop playsinline></video>
       </div>
-
-
-      <!-- Heart -->
 
       <div class="success-heart">
         ♥
       </div>
 
-
-      <!-- Eyebrow -->
-
       <p class="eyebrow">
         I knew it...
       </p>
-
-
-      <!-- Success Title -->
 
       <h1>
         You said YES! 🫢
       </h1>
 
-
-      <!-- Description -->
-
       <p class="description">
-
         You just made this moment
         <br>
-
         a little more special. ❤️
-
       </p>
-
-
-      <!-- Badge -->
 
       <div class="love-badge">
         Forever & Always ❤️
       </div>
 
-
       <!-- Back Button -->
-
-      <button
-        class="back-button js-back"
-        type="button"
-      >
-
+      <button class="back-button js-back" type="button">
         ↩ Back
-
       </button>
 
     </section>
 
   </main>
 
-
-
-  <!-- =========================================
-       LOADER
-  ========================================== -->
-
-  <div
-    class="loader"
-    aria-hidden="true"
-  >
-
+  <!-- ==============================
+       LOADING
+  =============================== -->
+  <div class="loader" aria-hidden="true">
     <div class="loader-heart">
       ♥
     </div>
-
     <p>
       Loading something special...
     </p>
-
   </div>
 
-
-
-  <!-- =========================================
-       JAVASCRIPT
-  ========================================== -->
-
+  <!-- JavaScript -->
   <script src="script.js"></script>
 
 </body>
