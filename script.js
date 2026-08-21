@@ -1,6 +1,5 @@
-
 // =========================================
-// ELEMENTS
+// GET ELEMENTS
 // =========================================
 
 const questionCard =
@@ -21,23 +20,39 @@ const noButton =
 const resultVideo =
   document.querySelector(".result-video");
 
+const backButton =
+  document.querySelector(".js-back");
+
 
 // =========================================
-// NO BUTTON
+// NO BUTTON TEXT
 // =========================================
 
 const noTexts = [
-  "No 😢",
+
+  "No ×",
+
   "Are you sure? 🥺",
+
   "Really? 😭",
+
   "Think again 💔",
+
   "Please? 🥹",
+
   "One more chance ❤️",
+
   "Try Yes 😏"
+
 ];
+
 
 let noCount = 0;
 
+
+// =========================================
+// NO BUTTON EVENTS
+// =========================================
 
 // Desktop
 noButton.addEventListener(
@@ -68,31 +83,41 @@ function moveNoButton() {
   noCount++;
 
 
-  // Change text
+  // Change button text
+
   noButton.textContent =
     noTexts[
       noCount % noTexts.length
     ];
 
 
-  // Make Yes button stronger
+  // Make YES button bigger
+
   const scale =
     Math.min(
       1 + noCount * 0.04,
       1.3
     );
 
+
   yesButton.style.transform =
     `scale(${scale})`;
 
 
-  // Screen boundaries
+  // Screen padding
+
   const padding = 15;
+
+
+  // Maximum X
 
   const maxX =
     window.innerWidth -
     noButton.offsetWidth -
     padding;
+
+
+  // Maximum Y
 
   const maxY =
     window.innerHeight -
@@ -100,12 +125,16 @@ function moveNoButton() {
     padding;
 
 
-  // Random position
+  // Random X
+
   const x =
     Math.floor(
       Math.random() *
       Math.max(maxX, padding)
     );
+
+
+  // Random Y
 
   const y =
     Math.floor(
@@ -114,23 +143,31 @@ function moveNoButton() {
     );
 
 
-  noButton.style.position = "fixed";
+  // Position
+
+  noButton.style.position =
+    "fixed";
+
 
   noButton.style.left =
     `${x}px`;
+
 
   noButton.style.top =
     `${y}px`;
 
 
   // Random rotation
+
   const rotate =
     Math.floor(
       Math.random() * 20
     ) - 10;
 
+
   noButton.style.transform =
     `rotate(${rotate}deg)`;
+
 }
 
 
@@ -143,47 +180,91 @@ yesButton.addEventListener(
   () => {
 
     // Disable buttons
-    yesButton.disabled = true;
-    noButton.disabled = true;
+
+    yesButton.disabled =
+      true;
+
+    noButton.disabled =
+      true;
 
 
     // Hide question
+
     questionCard.style.display =
       "none";
 
 
     // Show loader
+
     loader.style.display =
       "flex";
 
 
-    // Wait
+    // Wait 2.5 seconds
+
     setTimeout(() => {
 
+
       // Hide loader
+
       loader.style.display =
         "none";
 
 
       // Show success
+
       successCard.style.display =
         "block";
 
 
-      // Play result video
-      resultVideo.currentTime = 0;
+      // ==================================
+      // VIDEO WITH SOUND
+      // ==================================
+
+      resultVideo.muted =
+        false;
+
+
+      resultVideo.volume =
+        1;
+
+
+      resultVideo.currentTime =
+        0;
+
 
       resultVideo
         .play()
-        .catch(() => {
+        .then(() => {
+
           console.log(
-            "Video autoplay blocked."
+            "Love.mp4 is playing with sound ❤️"
           );
+
+        })
+        .catch((error) => {
+
+          console.log(
+            "Browser blocked autoplay:",
+            error
+          );
+
+
+          /*
+            If browser blocks autoplay
+            with sound, show controls.
+          */
+
+          resultVideo.controls =
+            true;
+
         });
 
 
-      // Hearts
+      // Create hearts
+
       createHearts();
+
 
     }, 2500);
 
@@ -192,30 +273,139 @@ yesButton.addEventListener(
 
 
 // =========================================
-// CREATE HEARTS
+// BACK BUTTON
+// =========================================
+
+backButton.addEventListener(
+  "click",
+  () => {
+
+
+    // Stop video
+
+    resultVideo.pause();
+
+
+    // Reset video
+
+    resultVideo.currentTime =
+      0;
+
+
+    // Hide controls
+
+    resultVideo.controls =
+      false;
+
+
+    // Hide success
+
+    successCard.style.display =
+      "none";
+
+
+    // Show question
+
+    questionCard.style.display =
+      "block";
+
+
+    // Enable YES
+
+    yesButton.disabled =
+      false;
+
+
+    // Reset YES size
+
+    yesButton.style.transform =
+      "scale(1)";
+
+
+    // Enable NO
+
+    noButton.disabled =
+      false;
+
+
+    // Reset NO text
+
+    noButton.textContent =
+      "No ×";
+
+
+    // Reset NO position
+
+    noButton.style.position =
+      "";
+
+
+    noButton.style.left =
+      "";
+
+
+    noButton.style.top =
+      "";
+
+
+    noButton.style.transform =
+      "";
+
+
+    // Reset counter
+
+    noCount = 0;
+
+  }
+);
+
+
+// =========================================
+// CREATE FLOATING HEARTS
 // =========================================
 
 function createHearts() {
 
+
   const hearts = [
+
     "❤️",
+
     "💖",
+
     "💕",
+
     "💗",
+
     "💓",
+
     "💞"
+
   ];
 
 
-  for (let i = 0; i < 35; i++) {
+  // Create 35 hearts
+
+  for (
+    let i = 0;
+    i < 35;
+    i++
+  ) {
+
 
     const heart =
-      document.createElement("div");
+      document.createElement(
+        "div"
+      );
 
+
+    // Class
 
     heart.className =
       "success-heart-float";
 
+
+    // Random heart
 
     heart.textContent =
       hearts[
@@ -226,57 +416,82 @@ function createHearts() {
       ];
 
 
-    // Position
+    // Random X
+
     heart.style.left =
-      Math.random() * 100 + "vw";
+      Math.random() *
+      100 +
+      "vw";
 
 
-    // Size
+    // Random size
+
     heart.style.fontSize =
-      `${18 + Math.random() * 25}px`;
+      `${
+        18 +
+        Math.random() * 25
+      }px`;
 
 
-    // Speed
+    // Random speed
+
     heart.style.animationDuration =
-      `${2.5 + Math.random() * 2.5}s`;
+      `${
+        2.5 +
+        Math.random() * 2.5
+      }s`;
 
 
-    // Delay
+    // Random delay
+
     heart.style.animationDelay =
-      `${Math.random() * 1.5}s`;
+      `${
+        Math.random() * 1.5
+      }s`;
 
+
+    // Add to page
 
     document.body.appendChild(
       heart
     );
 
 
-    setTimeout(() => {
+    // Remove
 
-      heart.remove();
+    setTimeout(
+      () => {
 
-    }, 6000);
+        heart.remove();
+
+      },
+      6000
+    );
 
   }
+
 }
 
 
 // =========================================
-// WINDOW RESIZE
+// RESET NO BUTTON WHEN RESIZE
 // =========================================
 
 window.addEventListener(
   "resize",
   () => {
 
-    noButton.style.position = "";
+    noButton.style.position =
+      "";
 
-    noButton.style.left = "";
+    noButton.style.left =
+      "";
 
-    noButton.style.top = "";
+    noButton.style.top =
+      "";
 
-    noButton.style.transform = "";
+    noButton.style.transform =
+      "";
 
   }
 );
-  
