@@ -1,4 +1,48 @@
+/* =========================================
+   BACK BUTTON
+========================================= */
 
+.back-button {
+  display: block;
+
+  margin: 22px auto 0;
+
+  padding: 11px 24px;
+
+  border: 1px solid rgba(255, 255, 255, 0.8);
+
+  border-radius: 100px;
+
+  background: rgba(255, 255, 255, 0.55);
+
+  color: #5b2635;
+
+  font-family: "Quicksand", sans-serif;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.back-button:hover {
+  transform: translateY(-3px);
+
+  background: rgba(255, 255, 255, 0.9);
+
+  box-shadow:
+    0 8px 20px rgba(80, 30, 50, 0.15);
+}
+
+.back-button:active {
+  transform: scale(0.96);
+}
 /* =========================================
    RESET
 ========================================= */
