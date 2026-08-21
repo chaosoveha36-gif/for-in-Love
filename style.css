@@ -1,19 +1,36 @@
-/* ======================================
-   MODERN BODY
-====================================== */
+
+/* =========================================
+   RESET
+========================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   BODY
+========================================= */
 
 body {
   min-height: 100vh;
+
   overflow: hidden;
+
+  font-family: "Quicksand", sans-serif;
+
+  color: #5b2635;
 
   background:
     radial-gradient(
-      circle at 20% 20%,
-      rgba(255, 255, 255, 0.7),
+      circle at 15% 20%,
+      rgba(255, 255, 255, 0.9),
       transparent 25%
     ),
     radial-gradient(
-      circle at 80% 80%,
+      circle at 85% 80%,
       rgba(255, 105, 135, 0.35),
       transparent 30%
     ),
@@ -23,75 +40,209 @@ body {
       #ffc2d1,
       #cdefff
     );
-
-  color: #4b2630;
 }
 
 
-/* ======================================
-   QUESTION CARD
-====================================== */
+/* =========================================
+   BACKGROUND HEARTS
+========================================= */
+
+.background-hearts {
+  position: fixed;
+
+  inset: 0;
+
+  overflow: hidden;
+
+  pointer-events: none;
+
+  z-index: 0;
+}
+
+.background-hearts span {
+  position: absolute;
+
+  bottom: -60px;
+
+  font-size: 25px;
+
+  opacity: 0.5;
+
+  animation: floatingHeart 9s linear infinite;
+}
+
+.background-hearts span:nth-child(1) {
+  left: 5%;
+  animation-delay: 0s;
+}
+
+.background-hearts span:nth-child(2) {
+  left: 18%;
+  animation-delay: 3s;
+}
+
+.background-hearts span:nth-child(3) {
+  left: 32%;
+  animation-delay: 5s;
+}
+
+.background-hearts span:nth-child(4) {
+  left: 48%;
+  animation-delay: 1s;
+}
+
+.background-hearts span:nth-child(5) {
+  left: 63%;
+  animation-delay: 4s;
+}
+
+.background-hearts span:nth-child(6) {
+  left: 75%;
+  animation-delay: 6s;
+}
+
+.background-hearts span:nth-child(7) {
+  left: 88%;
+  animation-delay: 2s;
+}
+
+.background-hearts span:nth-child(8) {
+  left: 95%;
+  animation-delay: 7s;
+}
+
+@keyframes floatingHeart {
+
+  0% {
+    transform:
+      translateY(0)
+      rotate(0deg)
+      scale(0.6);
+
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0.6;
+  }
+
+  80% {
+    opacity: 0.5;
+  }
+
+  100% {
+    transform:
+      translateY(-115vh)
+      rotate(360deg)
+      scale(1.3);
+
+    opacity: 0;
+  }
+}
+
+
+/* =========================================
+   QUESTION CONTAINER
+========================================= */
 
 .question-container {
+  position: fixed;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
   width: min(500px, 92vw);
 
-  padding: 30px 25px;
+  z-index: 10;
+
+  transition: 0.4s ease;
+}
+
+
+/* =========================================
+   LOVE CARD
+========================================= */
+
+.love-card {
+
+  padding: 32px 28px;
 
   text-align: center;
 
-  border-radius: 30px;
+  border-radius: 32px;
 
-  background: rgba(255, 255, 255, 0.35);
+  background:
+    rgba(255, 255, 255, 0.38);
 
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  border:
+    1px solid rgba(255, 255, 255, 0.75);
 
   box-shadow:
-    0 25px 60px rgba(100, 40, 60, 0.2);
+    0 30px 70px rgba(100, 40, 60, 0.2);
 
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(20px);
 
-  animation: cardIn 0.8s ease;
+  -webkit-backdrop-filter: blur(20px);
+
+  animation: cardAppear 0.9s ease;
 }
 
-@keyframes cardIn {
+@keyframes cardAppear {
 
   from {
     opacity: 0;
+
     transform:
-      translate(-50%, -45%)
+      translateY(40px)
       scale(0.85);
   }
 
   to {
     opacity: 1;
+
     transform:
-      translate(-50%, -50%)
+      translateY(0)
       scale(1);
   }
 }
 
 
-/* ======================================
+/* =========================================
    VIDEO
-====================================== */
+========================================= */
 
-.local-gif {
+.video-wrapper {
+
   width: 190px;
   height: 190px;
 
-  object-fit: cover;
+  margin: 0 auto 15px;
 
   border-radius: 50%;
 
-  border: 6px solid rgba(255, 255, 255, 0.9);
+  overflow: hidden;
+
+  border:
+    6px solid rgba(255, 255, 255, 0.9);
 
   box-shadow:
-    0 10px 35px rgba(255, 80, 120, 0.3);
-
-  margin-bottom: 20px;
+    0 12px 40px rgba(255, 65, 108, 0.3);
 
   animation: videoFloat 3s ease-in-out infinite;
+}
+
+.local-gif {
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  display: block;
+
+  pointer-events: none;
 }
 
 @keyframes videoFloat {
@@ -107,51 +258,117 @@ body {
 }
 
 
-/* ======================================
-   QUESTION TEXT
-====================================== */
+/* =========================================
+   HEART
+========================================= */
+
+.main-heart {
+
+  font-size: 40px;
+
+  margin-bottom: 4px;
+
+  animation: heartbeat 1.2s infinite;
+}
+
+@keyframes heartbeat {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+
+/* =========================================
+   TEXT
+========================================= */
+
+.question-label {
+
+  font-size: 14px;
+
+  font-weight: 500;
+
+  letter-spacing: 1px;
+
+  opacity: 0.75;
+}
 
 .question {
-  font-size: clamp(2rem, 7vw, 3rem);
 
-  line-height: 1.2;
+  margin-top: 7px;
+
+  font-size: clamp(2.2rem, 7vw, 3.2rem);
+
+  line-height: 1.15;
+
+  font-weight: 700;
 
   color: #642c3b;
 
   text-shadow:
     0 4px 15px rgba(255, 255, 255, 0.8);
+}
 
-  margin-bottom: 35px;
+.question span {
+
+  display: block;
+
+  margin-top: 8px;
+
+  font-size: 21px;
+
+  color: #ff416c;
+}
+
+.question-description {
+
+  margin-top: 12px;
+
+  font-size: 15px;
+
+  opacity: 0.75;
 }
 
 
-/* ======================================
-   BUTTON CONTAINER
-====================================== */
+/* =========================================
+   BUTTON AREA
+========================================= */
 
 .button-container {
+
   position: relative;
 
-  height: 70px;
+  height: 80px;
+
+  margin-top: 15px;
 
   display: flex;
 
   justify-content: center;
 
   align-items: center;
+
+  gap: 20px;
 }
 
 
-/* ======================================
+/* =========================================
    BUTTON
-====================================== */
+========================================= */
 
 .btn {
+
   border: none;
 
   border-radius: 50px;
 
-  padding: 13px 28px;
+  padding: 14px 30px;
 
   font-family: "Quicksand", sans-serif;
 
@@ -161,16 +378,18 @@ body {
 
   cursor: pointer;
 
+  color: white;
+
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease,
     background 0.25s ease;
 
-  color: white;
+  z-index: 20;
 }
 
 
-/* YES */
+/* YES BUTTON */
 
 .yes-btn {
 
@@ -191,11 +410,11 @@ body {
   transform: scale(1.12);
 
   box-shadow:
-    0 15px 35px rgba(255, 65, 108, 0.55);
+    0 15px 35px rgba(255, 65, 108, 0.6);
 }
 
 
-/* NO */
+/* NO BUTTON */
 
 .no-btn {
 
@@ -208,8 +427,6 @@ body {
 
   box-shadow:
     0 8px 20px rgba(60, 70, 80, 0.25);
-
-  z-index: 20;
 }
 
 .no-btn:hover {
@@ -218,97 +435,375 @@ body {
 }
 
 
-/* ======================================
-   RESULT
-====================================== */
+/* =========================================
+   BOTTOM TEXT
+========================================= */
+
+.bottom-text {
+
+  margin-top: 8px;
+
+  font-size: 12px;
+
+  opacity: 0.6;
+
+  letter-spacing: 0.5px;
+}
+
+
+/* =========================================
+   RESULT CONTAINER
+========================================= */
 
 .result-container {
 
+  display: none;
+
+  position: fixed;
+
+  top: 50%;
+  left: 50%;
+
+  transform:
+    translate(-50%, -50%);
+
   width: min(550px, 92vw);
 
-  padding: 30px;
+  z-index: 15;
+}
+
+
+/* =========================================
+   RESULT CARD
+========================================= */
+
+.result-card {
+
+  padding: 35px 25px;
 
   text-align: center;
 
-  border-radius: 30px;
+  border-radius: 32px;
 
-  background: rgba(255, 255, 255, 0.35);
+  background:
+    rgba(255, 255, 255, 0.4);
 
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  border:
+    1px solid rgba(255, 255, 255, 0.8);
 
   box-shadow:
-    0 25px 60px rgba(100, 40, 60, 0.2);
+    0 30px 70px rgba(100, 40, 60, 0.25);
 
-  backdrop-filter: blur(18px);
+  backdrop-filter: blur(20px);
 
-  animation: resultIn 1s ease;
+  -webkit-backdrop-filter: blur(20px);
+
+  animation: resultAppear 0.9s ease;
 }
 
-@keyframes resultIn {
+@keyframes resultAppear {
 
   from {
     opacity: 0;
+
     transform:
-      translate(-50%, -50%)
-      scale(0.5);
+      scale(0.5)
+      rotate(-5deg);
   }
 
   to {
     opacity: 1;
+
     transform:
-      translate(-50%, -50%)
-      scale(1);
+      scale(1)
+      rotate(0);
   }
 }
 
 
-.gif-result {
+/* =========================================
+   RESULT VIDEO
+========================================= */
+
+.result-video-wrapper {
 
   width: 230px;
   height: 230px;
 
-  object-fit: cover;
+  margin: 0 auto 15px;
 
   border-radius: 50%;
 
-  border: 6px solid white;
+  overflow: hidden;
+
+  border:
+    6px solid white;
 
   box-shadow:
-    0 10px 35px rgba(255, 65, 108, 0.35);
+    0 12px 40px rgba(255, 65, 108, 0.35);
+}
 
-  margin-bottom: 20px;
+.gif-result {
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  display: block;
 }
 
 
-.result-container h2 {
+/* =========================================
+   RESULT TEXT
+========================================= */
 
-  font-size: clamp(2rem, 7vw, 3.2rem);
+.result-heart {
+
+  font-size: 48px;
+
+  animation:
+    heartbeat 1s infinite;
+}
+
+.result-card h2 {
+
+  margin-top: 5px;
+
+  font-size: clamp(2rem, 7vw, 3rem);
+
+  line-height: 1.2;
+
+  color: #ff416c;
+}
+
+.result-message {
+
+  margin-top: 12px;
+
+  font-size: 16px;
+
+  opacity: 0.8;
+}
+
+.forever {
+
+  display: inline-block;
+
+  margin-top: 22px;
+
+  padding: 10px 22px;
+
+  border-radius: 50px;
+
+  background:
+    rgba(255, 255, 255, 0.35);
+
+  border:
+    1px solid rgba(255, 255, 255, 0.6);
+
+  font-weight: 700;
+
+  color: #ff416c;
+}
+
+
+/* =========================================
+   HEART LOADER
+========================================= */
+
+.cssload-main {
+
+  display: none;
+
+  position: fixed;
+
+  top: 50%;
+  left: 50%;
+
+  transform:
+    translate(-50%, -50%);
+
+  z-index: 100;
+
+  text-align: center;
+}
+
+.cssload-main * {
+  font-size: 62px;
+}
+
+.cssload-heart {
+
+  position: relative;
+
+  width: 1em;
+  height: 1em;
+
+  animation:
+    cssload-heart 2.88s
+    cubic-bezier(0.75, 0, 0.5, 1)
+    infinite;
+}
+
+.cssload-heartL,
+.cssload-heartR {
+
+  position: absolute;
+
+  display: block;
+
+  width: 1em;
+  height: 1em;
+
+  border:
+    1px solid #ff416c;
+
+  background:
+    #ff416c;
+
+  border-radius: 100%;
+}
+
+.cssload-heartL {
+
+  transform:
+    translate(-28px, -27px);
+
+  animation:
+    cssload-heartL 2.88s
+    cubic-bezier(0.75, 0, 0.5, 1)
+    infinite;
+}
+
+.cssload-heartR {
+
+  transform:
+    translate(28px, -27px);
+
+  animation:
+    cssload-heartR 2.88s
+    cubic-bezier(0.75, 0, 0.5, 1)
+    infinite;
+}
+
+.cssload-square {
+
+  position: relative;
+
+  display: block;
+
+  width: 1em;
+  height: 1em;
+
+  background:
+    #ff416c;
+
+  border:
+    1px solid #ff416c;
+
+  transform:
+    rotate(-45deg);
+
+  animation:
+    cssload-square 2.88s
+    cubic-bezier(0.75, 0, 0.5, 1)
+    infinite;
+}
+
+.cssload-shadow {
+
+  width: 1em;
+  height: 0.24em;
+
+  margin-top: 50px;
+
+  background:
+    rgba(100, 100, 100, 0.25);
+
+  border-radius: 50%;
+
+  animation:
+    cssload-shadow 2.88s
+    cubic-bezier(0.75, 0, 0.5, 1)
+    infinite;
+}
+
+.loading-text {
+
+  margin-top: 15px;
+
+  font-size: 16px;
 
   color: #ff416c;
 
-  text-shadow:
-    0 3px 10px rgba(255, 65, 108, 0.2);
-
-  animation: heartbeat 1.2s infinite;
+  font-weight: 700;
 }
 
 
-@keyframes heartbeat {
+/* =========================================
+   LOADER ANIMATIONS
+========================================= */
 
-  0%,
-  100% {
-    transform: scale(1);
-  }
+@keyframes cssload-heart {
 
   50% {
-    transform: scale(1.08);
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(720deg);
+  }
+}
+
+@keyframes cssload-heartL {
+
+  60% {
+    transform:
+      translate(-28px, -27px)
+      scale(0.4);
+  }
+}
+
+@keyframes cssload-heartR {
+
+  40% {
+    transform:
+      translate(28px, -27px)
+      scale(0.4);
+  }
+}
+
+@keyframes cssload-square {
+
+  50% {
+
+    border-radius: 100%;
+
+    transform:
+      scale(0.5)
+      rotate(-45deg);
+  }
+
+  100% {
+
+    transform:
+      scale(1)
+      rotate(-45deg);
+  }
+}
+
+@keyframes cssload-shadow {
+
+  50% {
+    transform: scale(0.5);
   }
 }
 
 
-/* ======================================
-   FLOATING HEARTS
-====================================== */
+/* =========================================
+   SUCCESS HEARTS
+========================================= */
 
 .floating-heart {
 
@@ -321,10 +816,10 @@ body {
   pointer-events: none;
 
   animation:
-    floatHeart 4s linear forwards;
+    successHeart 4s linear forwards;
 }
 
-@keyframes floatHeart {
+@keyframes successHeart {
 
   0% {
 
@@ -332,7 +827,7 @@ body {
 
     transform:
       translateY(0)
-      rotate(0deg)
+      rotate(0)
       scale(0.5);
   }
 
@@ -352,51 +847,96 @@ body {
 }
 
 
-/* ======================================
+/* =========================================
    MOBILE
-====================================== */
+========================================= */
 
 @media (max-width: 600px) {
 
   .question-container {
 
-    padding: 25px 18px;
-
+    width: 92vw;
   }
 
-  .local-gif {
+  .love-card {
+
+    padding: 25px 18px;
+
+    border-radius: 26px;
+  }
+
+  .video-wrapper {
 
     width: 150px;
     height: 150px;
-
   }
 
   .question {
 
-    font-size: 2rem;
+    font-size: 2.1rem;
+  }
 
-    margin-bottom: 25px;
+  .question span {
 
+    font-size: 18px;
   }
 
   .btn {
 
-    font-size: 16px;
-
     padding: 12px 24px;
 
+    font-size: 16px;
   }
 
-  .gif-result {
+  .result-card {
+
+    padding: 25px 18px;
+
+    border-radius: 26px;
+  }
+
+  .result-video-wrapper {
 
     width: 180px;
     height: 180px;
-
   }
 
-  .result-container h2 {
+  .result-card h2 {
 
     font-size: 2rem;
-
   }
+
 }
+
+
+/* =========================================
+   VERY SMALL PHONE
+========================================= */
+
+@media (max-width: 380px) {
+
+  .video-wrapper {
+
+    width: 125px;
+    height: 125px;
+  }
+
+  .question {
+
+    font-size: 1.8rem;
+  }
+
+  .button-container {
+
+    gap: 10px;
+  }
+
+  .btn {
+
+    padding: 10px 20px;
+
+    font-size: 15px;
+  }
+
+}
+
