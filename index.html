@@ -10,7 +10,12 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Do You Love Me? ❤️</title>
+  <meta
+    name="description"
+    content="A special question for someone special ❤️"
+  >
+
+  <title>For Van Srey Keav ❤️</title>
 
   <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,40 +26,45 @@
     rel="stylesheet"
   >
 
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <!-- ==============================
-       BACKGROUND HEARTS
-  =============================== -->
+  <!-- Background -->
+  <div class="background">
+    <div class="gradient gradient-1"></div>
+    <div class="gradient gradient-2"></div>
+    <div class="noise"></div>
+  </div>
 
-  <div class="background-hearts">
-    <span>❤️</span>
-    <span>💕</span>
-    <span>💗</span>
-    <span>💖</span>
-    <span>💓</span>
-    <span>💞</span>
-    <span>❤️</span>
-    <span>💗</span>
+  <!-- Floating hearts -->
+  <div class="floating-hearts" aria-hidden="true">
+    <span>♡</span>
+    <span>♡</span>
+    <span>♡</span>
+    <span>♡</span>
+    <span>♡</span>
   </div>
 
 
   <!-- ==============================
-       QUESTION PAGE
+       QUESTION
   =============================== -->
 
-  <main class="question-container">
+  <main class="page">
 
-    <div class="love-card">
+    <section
+      class="card question-card"
+      aria-label="Love question"
+    >
 
-      <!-- Video -->
-      <div class="video-wrapper">
+      <!-- Media -->
+      <div class="media">
 
         <video
-          class="local-gif"
+          class="main-video"
           src="202602011711 (3).mp4"
           autoplay
           muted
@@ -66,100 +76,74 @@
 
 
       <!-- Heart -->
-      <div class="main-heart">
-        ❤️
-      </div>
+      <div class="heart">♥</div>
 
 
-      <!-- Small title -->
-      <p class="question-label">
-        I have a little question for you...
+      <p class="eyebrow">
+        A little question for you
       </p>
 
 
-      <!-- Main question -->
-      <h1 class="question">
+      <h1>
         Do you love me?
-
-        <span>
-          Van Srey Keav 💕
-        </span>
       </h1>
 
 
-      <!-- Description -->
-      <p class="question-description">
-        Please answer honestly... 🥺
+      <h2>
+        Van Srey Keav
+      </h2>
+
+
+      <p class="description">
+        There is only one question...
+        <br>
+        but your answer means a lot. ❤️
       </p>
 
 
       <!-- Buttons -->
-      <div class="button-container">
+      <div class="actions">
 
         <button
-          class="yes-btn btn js-yes-btn"
+          class="button button-yes js-yes"
           type="button"
         >
-          ❤️ Yes
+          <span>Yes</span>
+          <span>♥</span>
         </button>
 
+
         <button
-          class="no-btn btn js-no-btn"
+          class="button button-no js-no"
           type="button"
         >
-          No 😢
+          <span>No</span>
+          <span>×</span>
         </button>
 
       </div>
 
 
-      <p class="bottom-text">
-        Choose carefully... 😏
+      <p class="hint">
+        Choose wisely ✨
       </p>
 
-    </div>
-
-  </main>
+    </section>
 
 
-  <!-- ==============================
-       HEART LOADER
-  =============================== -->
+    <!-- ==============================
+         SUCCESS
+    =============================== -->
 
-  <div class="cssload-main">
+    <section
+      class="card success-card"
+      aria-label="Love result"
+    >
 
-    <div class="cssload-heart">
-
-      <span class="cssload-heartL"></span>
-
-      <span class="cssload-heartR"></span>
-
-      <span class="cssload-square"></span>
-
-    </div>
-
-    <div class="cssload-shadow"></div>
-
-    <p class="loading-text">
-      Loading love...
-    </p>
-
-  </div>
-
-
-  <!-- ==============================
-       RESULT PAGE
-  =============================== -->
-
-  <section class="result-container">
-
-    <div class="result-card">
-
-      <!-- Result video -->
-      <div class="result-video-wrapper">
+      <div class="media success-media">
 
         <video
-          class="gif-result"
+          class="result-video"
           src="Love.mp4"
           loop
           muted
@@ -169,32 +153,58 @@
       </div>
 
 
-      <!-- Heart -->
-      <div class="result-heart">
-        💖
+      <div class="success-heart">
+        ♥
       </div>
 
 
-      <!-- Result -->
-      <h2>
-        I knew you would say YES! 🫢
-      </h2>
-
-
-      <p class="result-message">
-        You just made my heart very happy ❤️
+      <p class="eyebrow">
+        I knew it...
       </p>
 
 
-      <div class="forever">
-        Forever & Always 💕
+      <h1>
+        You said YES! 🫢
+      </h1>
+
+
+      <p class="description">
+        You just made this moment
+        <br>
+        a little more special. ❤️
+      </p>
+
+
+      <div class="love-badge">
+        Forever & Always
       </div>
 
+    </section>
+
+  </main>
+
+
+  <!-- ==============================
+       LOADING
+  =============================== -->
+
+  <div
+    class="loader"
+    aria-hidden="true"
+  >
+
+    <div class="loader-heart">
+      ♥
     </div>
 
-  </section>
+    <p>
+      Loading something special...
+    </p>
+
+  </div>
 
 
+  <!-- JavaScript -->
   <script src="script.js"></script>
 
 </body>
