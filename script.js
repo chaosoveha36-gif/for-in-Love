@@ -1,5 +1,4 @@
 
-
 const questionContainer =
   document.querySelector(".question-container");
 
@@ -255,3 +254,4 @@ window.addEventListener("resize", () => {
   noBtn.style.transform = "";
 
 });
+
