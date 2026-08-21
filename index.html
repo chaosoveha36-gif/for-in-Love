@@ -10,52 +10,43 @@
     content="width=device-width, initial-scale=1.0"
   >
 
+  <title>Do You Love Me? ❤️</title>
+
   <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   >
 
-  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
-
-  <title>Do You Love Me? ❤️</title>
-
-  <!-- Favicon -->
-  <link
-    rel="apple-touch-icon"
-    href="https://codetap.org/assets/img/favicon.png"
-  >
-
-  <link
-    rel="icon"
-    type="image/png"
-    href="https://codetap.org/assets/img/favicon.png"
-  >
 </head>
 
 <body>
 
-  <!-- Background Hearts -->
+  <!-- ==============================
+       BACKGROUND HEARTS
+  =============================== -->
+
   <div class="background-hearts">
     <span>❤️</span>
     <span>💕</span>
     <span>💗</span>
     <span>💖</span>
     <span>💓</span>
+    <span>💞</span>
     <span>❤️</span>
-    <span>💕</span>
+    <span>💗</span>
   </div>
 
 
-  <!-- =========================
-       QUESTION SECTION
-  ========================== -->
+  <!-- ==============================
+       QUESTION PAGE
+  =============================== -->
 
-  <div class="question-container container">
+  <main class="question-container">
 
     <div class="love-card">
 
@@ -80,21 +71,19 @@
       </div>
 
 
-      <!-- Small Text -->
+      <!-- Small title -->
       <p class="question-label">
-        I have a question for you...
+        I have a little question for you...
       </p>
 
 
-      <!-- Question -->
+      <!-- Main question -->
       <h1 class="question">
-
         Do you love me?
 
         <span>
           Van Srey Keav 💕
         </span>
-
       </h1>
 
 
@@ -109,12 +98,14 @@
 
         <button
           class="yes-btn btn js-yes-btn"
+          type="button"
         >
           ❤️ Yes
         </button>
 
         <button
           class="no-btn btn js-no-btn"
+          type="button"
         >
           No 😢
         </button>
@@ -128,64 +119,12 @@
 
     </div>
 
-  </div>
+  </main>
 
 
-
-  <!-- =========================
-       RESULT SECTION
-  ========================== -->
-
-  <div class="result-container container">
-
-    <div class="result-card">
-
-      <!-- Result Video -->
-      <div class="result-video-wrapper">
-
-        <video
-          class="gif-result"
-          src="Love.mp4"
-          autoplay
-          loop
-          muted
-          playsinline
-        ></video>
-
-      </div>
-
-
-      <!-- Big Heart -->
-      <div class="result-heart">
-        💖
-      </div>
-
-
-      <!-- Result Title -->
-      <h2>
-        I knew you would say YES! 🫢
-      </h2>
-
-
-      <!-- Message -->
-      <p class="result-message">
-        You just made my heart very happy ❤️
-      </p>
-
-
-      <div class="forever">
-        Forever & Always 💕
-      </div>
-
-    </div>
-
-  </div>
-
-
-
-  <!-- =========================
+  <!-- ==============================
        HEART LOADER
-  ========================== -->
+  =============================== -->
 
   <div class="cssload-main">
 
@@ -208,11 +147,57 @@
   </div>
 
 
+  <!-- ==============================
+       RESULT PAGE
+  =============================== -->
 
-  <!-- JavaScript -->
+  <section class="result-container">
+
+    <div class="result-card">
+
+      <!-- Result video -->
+      <div class="result-video-wrapper">
+
+        <video
+          class="gif-result"
+          src="Love.mp4"
+          loop
+          muted
+          playsinline
+        ></video>
+
+      </div>
+
+
+      <!-- Heart -->
+      <div class="result-heart">
+        💖
+      </div>
+
+
+      <!-- Result -->
+      <h2>
+        I knew you would say YES! 🫢
+      </h2>
+
+
+      <p class="result-message">
+        You just made my heart very happy ❤️
+      </p>
+
+
+      <div class="forever">
+        Forever & Always 💕
+      </div>
+
+    </div>
+
+  </section>
+
+
   <script src="script.js"></script>
 
 </body>
 
 </html>
-
+  
