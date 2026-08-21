@@ -1,17 +1,25 @@
-// =========================================
-// ELEMENTS
-// =========================================
+/* =========================================
+   ELEMENTS
+========================================= */
+
 const questionCard = document.querySelector(".question-card");
+
 const successCard = document.querySelector(".success-card");
+
 const loader = document.querySelector(".loader");
+
 const yesButton = document.querySelector(".js-yes");
+
 const noButton = document.querySelector(".js-no");
+
 const resultVideo = document.querySelector(".result-video");
+
 const backButton = document.querySelector(".js-back");
 
-// =========================================
-// NO BUTTON
-// =========================================
+/* =========================================
+   SETTINGS
+========================================= */
+
 const noTexts = [
   "No 😢",
   "Are you sure? 🥺",
@@ -19,154 +27,318 @@ const noTexts = [
   "Think again 💔",
   "Please? 🥹",
   "One more chance ❤️",
-  "Try Yes 😏"
+  "Try Yes 😏",
 ];
 
 let noCount = 0;
 
-// Desktop
+let loadingTimer = null;
+
+/* =========================================
+   NO BUTTON — DESKTOP
+========================================= */
+
 noButton.addEventListener("mouseenter", moveNoButton);
 
-// Mobile
-noButton.addEventListener("touchstart", (event) => {
-  event.preventDefault();
-  moveNoButton();
-});
+/* =========================================
+   NO BUTTON — MOBILE
+========================================= */
 
-// =========================================
-// MOVE NO BUTTON
-// =========================================
+noButton.addEventListener(
+  "touchstart",
+  (event) => {
+    event.preventDefault();
+
+    moveNoButton();
+  },
+  {
+    passive: false,
+  },
+);
+
+/* =========================================
+   MOVE NO BUTTON
+========================================= */
+
 function moveNoButton() {
   noCount++;
+
+  /* Change text */
 
   noButton.textContent = noTexts[noCount % noTexts.length];
 
-  // Make YES button bigger
+  /* Make YES bigger */
+
   const scale = Math.min(1 + noCount * 0.04, 1.3);
+
   yesButton.style.transform = `scale(${scale})`;
 
-  const padding = 15;
-  const maxX = window.innerWidth - noButton.offsetWidth - padding;
-  const maxY = window.innerHeight - noButton.offsetHeight - padding;
+  /* Screen boundaries */
 
-  const x = Math.floor(Math.random() * Math.max(maxX, padding));
-  const y = Math.floor(Math.random() * Math.max(maxY, padding));
+  const padding = 15;
+
+  const maxX = Math.max(
+    window.innerWidth - noButton.offsetWidth - padding,
+
+    padding,
+  );
+
+  const maxY = Math.max(
+    window.innerHeight - noButton.offsetHeight - padding,
+
+    padding,
+  );
+
+  /* Random position */
+
+  const x = Math.floor(Math.random() * maxX);
+
+  const y = Math.floor(Math.random() * maxY);
+
+  /* Move button */
 
   noButton.style.position = "fixed";
+
   noButton.style.left = `${x}px`;
+
   noButton.style.top = `${y}px`;
 
+  /* Random rotation */
+
   const rotate = Math.floor(Math.random() * 20) - 10;
+
   noButton.style.transform = `rotate(${rotate}deg)`;
 }
 
-// =========================================
-// YES BUTTON
-// =========================================
-yesButton.addEventListener("click", () => {
-  // Disable buttons
+/* =========================================
+   YES BUTTON
+========================================= */
+
+yesButton.addEventListener("click", handleYes);
+
+/* =========================================
+   YES FUNCTION
+========================================= */
+
+function handleYes() {
+  /* Prevent double click */
+
+  if (yesButton.disabled) {
+    return;
+  }
+
+  /* Disable buttons */
+
   yesButton.disabled = true;
+
   noButton.disabled = true;
 
-  // Hide question
+  /* Hide question */
+
   questionCard.style.display = "none";
 
-  // Show loader
+  /* Show loader */
+
   loader.style.display = "flex";
 
-  // =====================================
-  // START VIDEO IMMEDIATELY
-  // =====================================
+  /* =======================================
+     PREPARE VIDEO
+  ======================================= */
+
   resultVideo.pause();
+
   resultVideo.currentTime = 0;
 
-  // Turn sound ON
+  /* Turn sound ON */
+
   resultVideo.muted = false;
-  resultVideo.volume = 1.0;
+
+  resultVideo.volume = 1;
+
+  /* =======================================
+     START VIDEO IMMEDIATELY
+  ======================================= */
 
   const playPromise = resultVideo.play();
 
   if (playPromise !== undefined) {
     playPromise
       .then(() => {
-        console.log("Video + Sound started successfully ❤️");
+        console.log("❤️ Video started with sound!");
       })
+
       .catch((error) => {
         console.error("Video playback error:", error);
+
+        /*
+          Some browsers may block
+          unmuted video playback.
+        */
+
         resultVideo.controls = true;
       });
   }
 
-  // =====================================
-  // WAIT FOR LOADING ANIMATION
-  // =====================================
-  setTimeout(() => {
-    // Hide loader
+  /* =======================================
+     WAIT FOR LOADER
+  ======================================= */
+
+  clearTimeout(loadingTimer);
+
+  loadingTimer = setTimeout(() => {
+    /* Hide loader */
+
     loader.style.display = "none";
 
-    // Show result
+    /* Show success */
+
     successCard.style.display = "block";
 
-    // Create hearts
+    /* Make sure video stays unmuted */
+
+    resultVideo.muted = false;
+
+    resultVideo.volume = 1;
+
+    /*
+        If video was blocked before,
+        try again after success card
+        becomes visible.
+      */
+
+    if (resultVideo.paused) {
+      resultVideo.play().catch((error) => {
+        console.log("Video needs user interaction:", error);
+
+        resultVideo.controls = true;
+      });
+    }
+
+    /* Create hearts */
+
     createHearts();
   }, 2500);
-});
+}
 
-// =========================================
-// BACK BUTTON
-// =========================================
-backButton.addEventListener("click", () => {
-  // Stop video
+/* =========================================
+   BACK BUTTON
+========================================= */
+
+backButton.addEventListener("click", handleBack);
+
+/* =========================================
+   BACK FUNCTION
+========================================= */
+
+function handleBack() {
+  /* Stop loader timer */
+
+  clearTimeout(loadingTimer);
+
+  /* Hide loader */
+
+  loader.style.display = "none";
+
+  /* Stop video */
+
   resultVideo.pause();
+
   resultVideo.currentTime = 0;
+
+  /* Reset video */
+
+  resultVideo.muted = false;
+
+  resultVideo.volume = 1;
+
+  /* Hide controls */
+
   resultVideo.controls = false;
 
-  // Hide success
+  /* Hide success */
+
   successCard.style.display = "none";
 
-  // Show question
+  /* Show question */
+
   questionCard.style.display = "block";
 
-  // Reset Yes button
+  /* Reset YES */
+
   yesButton.disabled = false;
+
   yesButton.style.transform = "scale(1)";
 
-  // Reset No button
+  /* Reset NO */
+
   noButton.disabled = false;
+
   noButton.textContent = "No ×";
+
   noButton.style.position = "";
+
   noButton.style.left = "";
+
   noButton.style.top = "";
+
   noButton.style.transform = "";
 
-  // Reset counter
-  noCount = 0;
-});
+  /* Reset counter */
 
-// =========================================
-// FLOATING HEARTS
-// =========================================
+  noCount = 0;
+
+  /* Remove floating hearts */
+
+  document.querySelectorAll(".success-heart-float").forEach((heart) => {
+    heart.remove();
+  });
+}
+
+/* =========================================
+   CREATE FLOATING HEARTS
+========================================= */
+
 function createHearts() {
   const hearts = ["❤️", "💖", "💕", "💗", "💓", "💞"];
 
+  /* Remove old hearts */
+
+  document.querySelectorAll(".success-heart-float").forEach((heart) => {
+    heart.remove();
+  });
+
+  /* Create new hearts */
+
   for (let i = 0; i < 35; i++) {
     const heart = document.createElement("div");
+
     heart.className = "success-heart-float";
+
+    /* Random heart */
+
     heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
 
-    // Random position
+    /* Random position */
+
     heart.style.left = Math.random() * 100 + "vw";
 
-    // Random size
+    /* Random size */
+
     heart.style.fontSize = `${18 + Math.random() * 25}px`;
 
-    // Random speed
+    /* Random speed */
+
     heart.style.animationDuration = `${2.5 + Math.random() * 2.5}s`;
 
-    // Random delay
+    /* Random delay */
+
     heart.style.animationDelay = `${Math.random() * 1.5}s`;
 
+    /* Add to body */
+
     document.body.appendChild(heart);
+
+    /* Remove */
 
     setTimeout(() => {
       heart.remove();
@@ -174,340 +346,31 @@ function createHearts() {
   }
 }
 
-// =========================================
-// RESET ON WINDOW RESIZE
-// =========================================
+/* =========================================
+   WINDOW RESIZE
+========================================= */
+
 window.addEventListener("resize", () => {
-  noButton.style.position = "";
-  noButton.style.left = "";
-  noButton.style.top = "";
-  noButton.style.transform = "";
+  /*
+      Only reset the No button
+      if it is currently moving.
+    */
+
+  if (noButton.style.position === "fixed") {
+    noButton.style.position = "";
+
+    noButton.style.left = "";
+
+    noButton.style.top = "";
+
+    noButton.style.transform = "";
+  }
 });
-// =========================================
-// ELEMENTS
-// =========================================
 
-const questionCard = document.querySelector(".question-card");
-const successCard = document.querySelector(".success-card");
-const loader = document.querySelector(".loader");
+/* =========================================
+   PREVENT VIDEO CONTEXT MENU
+========================================= */
 
-const yesButton = document.querySelector(".js-yes");
-const noButton = document.querySelector(".js-no");
-const backButton = document.querySelector(".js-back");
-
-const resultVideo = document.querySelector(".result-video");
-
-
-// =========================================
-// NO BUTTON
-// =========================================
-
-const noTexts = [
-  "No 😢",
-  "Are you sure? 🥺",
-  "Really? 😭",
-  "Think again 💔",
-  "Please? 🥹",
-  "One more chance ❤️",
-  "Try Yes 😏"
-];
-
-let noCount = 0;
-
-
-// Desktop
-noButton.addEventListener("mouseenter", moveNoButton);
-
-
-// Mobile
-noButton.addEventListener("touchstart", (event) => {
+resultVideo.addEventListener("contextmenu", (event) => {
   event.preventDefault();
-  moveNoButton();
-});
-
-
-// =========================================
-// MOVE NO BUTTON
-// =========================================
-
-function moveNoButton() {
-
-  noCount++;
-
-  noButton.textContent =
-    noTexts[noCount % noTexts.length];
-
-
-  // Make YES button bigger
-  const scale = Math.min(
-    1 + noCount * 0.04,
-    1.3
-  );
-
-  yesButton.style.transform =
-    `scale(${scale})`;
-
-
-  // Screen boundaries
-  const padding = 15;
-
-  const maxX =
-    window.innerWidth -
-    noButton.offsetWidth -
-    padding;
-
-  const maxY =
-    window.innerHeight -
-    noButton.offsetHeight -
-    padding;
-
-
-  const x = Math.floor(
-    Math.random() *
-    Math.max(maxX, padding)
-  );
-
-  const y = Math.floor(
-    Math.random() *
-    Math.max(maxY, padding)
-  );
-
-
-  noButton.style.position = "fixed";
-  noButton.style.left = `${x}px`;
-  noButton.style.top = `${y}px`;
-
-
-  // Random rotation
-  const rotate =
-    Math.floor(Math.random() * 20) - 10;
-
-  noButton.style.transform =
-    `rotate(${rotate}deg)`;
-}
-
-
-// =========================================
-// YES BUTTON
-// =========================================
-
-yesButton.addEventListener("click", () => {
-
-  // Disable buttons
-  yesButton.disabled = true;
-  noButton.disabled = true;
-
-
-  // =======================================
-  // PREPARE VIDEO
-  // =======================================
-
-  resultVideo.pause();
-  resultVideo.currentTime = 0;
-
-  // Turn sound ON
-  resultVideo.muted = false;
-  resultVideo.volume = 1;
-
-
-  // =======================================
-  // PLAY VIDEO IMMEDIATELY
-  // =======================================
-
-  const playPromise = resultVideo.play();
-
-
-  if (playPromise !== undefined) {
-
-    playPromise
-      .then(() => {
-
-        console.log(
-          "❤️ Video started with sound!"
-        );
-
-      })
-      .catch((error) => {
-
-        console.error(
-          "Video playback error:",
-          error
-        );
-
-        /*
-         * Browser may block sound/video.
-         * Show controls so user can press play.
-         */
-
-        resultVideo.controls = true;
-
-      });
-
-  }
-
-
-  // =======================================
-  // HIDE QUESTION
-  // =======================================
-
-  questionCard.style.display = "none";
-
-
-  // =======================================
-  // SHOW LOADER
-  // =======================================
-
-  loader.style.display = "flex";
-
-
-  // =======================================
-  // WAIT 2.5 SECONDS
-  // =======================================
-
-  setTimeout(() => {
-
-    // Hide loader
-    loader.style.display = "none";
-
-
-    // Show success card
-    successCard.style.display = "block";
-
-
-    // Create floating hearts
-    createHearts();
-
-  }, 2500);
-
-});
-
-
-// =========================================
-// BACK BUTTON
-// =========================================
-
-backButton.addEventListener("click", () => {
-
-  // Stop video
-  resultVideo.pause();
-
-  resultVideo.currentTime = 0;
-
-  // Reset video
-  resultVideo.muted = false;
-  resultVideo.volume = 1;
-
-  // Hide controls
-  resultVideo.controls = false;
-
-
-  // Hide success card
-  successCard.style.display = "none";
-
-
-  // Show question card
-  questionCard.style.display = "block";
-
-
-  // Reset YES
-  yesButton.disabled = false;
-
-  yesButton.style.transform = "scale(1)";
-
-
-  // Reset NO
-  noButton.disabled = false;
-
-  noButton.textContent = "No ×";
-
-  noButton.style.position = "";
-  noButton.style.left = "";
-  noButton.style.top = "";
-  noButton.style.transform = "";
-
-
-  // Reset counter
-  noCount = 0;
-
-});
-
-
-// =========================================
-// FLOATING HEARTS
-// =========================================
-
-function createHearts() {
-
-  const hearts = [
-    "❤️",
-    "💖",
-    "💕",
-    "💗",
-    "💓",
-    "💞"
-  ];
-
-
-  for (let i = 0; i < 35; i++) {
-
-    const heart =
-      document.createElement("div");
-
-
-    heart.className =
-      "success-heart-float";
-
-
-    heart.textContent =
-      hearts[
-        Math.floor(
-          Math.random() * hearts.length
-        )
-      ];
-
-
-    // Random position
-    heart.style.left =
-      Math.random() * 100 + "vw";
-
-
-    // Random size
-    heart.style.fontSize =
-      `${18 + Math.random() * 25}px`;
-
-
-    // Random speed
-    heart.style.animationDuration =
-      `${2.5 + Math.random() * 2.5}s`;
-
-
-    // Random delay
-    heart.style.animationDelay =
-      `${Math.random() * 1.5}s`;
-
-
-    document.body.appendChild(heart);
-
-
-    // Remove after animation
-    setTimeout(() => {
-      heart.remove();
-    }, 6000);
-
-  }
-
-}
-
-
-// =========================================
-// WINDOW RESIZE
-// =========================================
-
-window.addEventListener("resize", () => {
-
-  noButton.style.position = "";
-  noButton.style.left = "";
-  noButton.style.top = "";
-  noButton.style.transform = "";
-
 });
