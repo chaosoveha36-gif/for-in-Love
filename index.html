@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,35 +31,58 @@
 
 <body>
 
-  <!-- Background -->
+  <!-- =====================================
+       BACKGROUND
+  ====================================== -->
+
   <div class="background">
+
     <div class="gradient gradient-1"></div>
+
     <div class="gradient gradient-2"></div>
+
     <div class="noise"></div>
-  </div>
 
-  <!-- Floating hearts -->
-  <div class="floating-hearts" aria-hidden="true">
-    <span>♡</span>
-    <span>♡</span>
-    <span>♡</span>
-    <span>♡</span>
-    <span>♡</span>
   </div>
 
 
-  <!-- ==============================
-       QUESTION
-  =============================== -->
+  <!-- =====================================
+       FLOATING BACKGROUND HEARTS
+  ====================================== -->
+
+  <div
+    class="floating-hearts"
+    aria-hidden="true"
+  >
+
+    <span>♡</span>
+    <span>♡</span>
+    <span>♡</span>
+    <span>♡</span>
+    <span>♡</span>
+
+  </div>
+
+
+  <!-- =====================================
+       MAIN PAGE
+  ====================================== -->
 
   <main class="page">
+
+
+    <!-- ===================================
+         QUESTION CARD
+    ==================================== -->
 
     <section
       class="card question-card"
       aria-label="Love question"
     >
 
-      <!-- Media -->
+
+      <!-- Video -->
+
       <div class="media">
 
         <video
@@ -76,49 +98,83 @@
 
 
       <!-- Heart -->
-      <div class="heart">♥</div>
 
+      <div class="heart">
+        ♥
+      </div>
+
+
+      <!-- Small title -->
 
       <p class="eyebrow">
         A little question for you
       </p>
 
 
+      <!-- Question -->
+
       <h1>
         Do you love me?
       </h1>
 
+
+      <!-- Name -->
 
       <h2>
         Van Srey Keav
       </h2>
 
 
+      <!-- Description -->
+
       <p class="description">
+
         There is only one question...
         <br>
+
         but your answer means a lot. ❤️
+
       </p>
 
 
       <!-- Buttons -->
+
       <div class="actions">
+
+
+        <!-- YES -->
 
         <button
           class="button button-yes js-yes"
           type="button"
         >
-          <span>Yes</span>
-          <span>♥</span>
+
+          <span>
+            Yes
+          </span>
+
+          <span>
+            ♥
+          </span>
+
         </button>
 
+
+        <!-- NO -->
 
         <button
           class="button button-no js-no"
           type="button"
         >
-          <span>No</span>
-          <span>×</span>
+
+          <span>
+            No
+          </span>
+
+          <span>
+            ×
+          </span>
+
         </button>
 
       </div>
@@ -131,14 +187,18 @@
     </section>
 
 
-    <!-- ==============================
-         SUCCESS
-    =============================== -->
+
+    <!-- ===================================
+         SUCCESS CARD
+    ==================================== -->
 
     <section
       class="card success-card"
       aria-label="Love result"
     >
+
+
+      <!-- Result Video -->
 
       <div class="media success-media">
 
@@ -146,47 +206,74 @@
           class="result-video"
           src="Love.mp4"
           loop
-          muted
           playsinline
         ></video>
 
       </div>
 
 
+      <!-- Heart -->
+
       <div class="success-heart">
         ♥
       </div>
 
+
+      <!-- Small title -->
 
       <p class="eyebrow">
         I knew it...
       </p>
 
 
+      <!-- Success -->
+
       <h1>
         You said YES! 🫢
       </h1>
 
 
+      <!-- Message -->
+
       <p class="description">
+
         You just made this moment
         <br>
+
         a little more special. ❤️
+
       </p>
 
 
+      <!-- Badge -->
+
       <div class="love-badge">
-        Forever & Always
+
+        Forever & Always ❤️
+
       </div>
+
+
+      <!-- BACK BUTTON -->
+
+      <button
+        class="back-button js-back"
+        type="button"
+      >
+
+        ↩ Back
+
+      </button>
 
     </section>
 
   </main>
 
 
-  <!-- ==============================
-       LOADING
-  =============================== -->
+
+  <!-- =====================================
+       LOADING SCREEN
+  ====================================== -->
 
   <div
     class="loader"
@@ -204,10 +291,13 @@
   </div>
 
 
-  <!-- JavaScript -->
+
+  <!-- =====================================
+       JAVASCRIPT
+  ====================================== -->
+
   <script src="script.js"></script>
 
 </body>
 
 </html>
-
