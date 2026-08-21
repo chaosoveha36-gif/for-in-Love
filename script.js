@@ -10,7 +10,7 @@ const resultVideo = document.querySelector(".result-video");
 const backButton = document.querySelector(".js-back");
 
 // =========================================
-// NO BUTTON TEXTS & COUNTER
+// NO BUTTON
 // =========================================
 const noTexts = [
   "No 😢",
@@ -24,17 +24,17 @@ const noTexts = [
 
 let noCount = 0;
 
-// Desktop hover
+// Desktop
 noButton.addEventListener("mouseenter", moveNoButton);
 
-// Mobile touch
+// Mobile
 noButton.addEventListener("touchstart", (event) => {
   event.preventDefault();
   moveNoButton();
 });
 
 // =========================================
-// MOVE NO BUTTON FUNCTION
+// MOVE NO BUTTON
 // =========================================
 function moveNoButton() {
   noCount++;
@@ -61,7 +61,7 @@ function moveNoButton() {
 }
 
 // =========================================
-// YES BUTTON CLICK
+// YES BUTTON
 // =========================================
 yesButton.addEventListener("click", () => {
   // Disable buttons
@@ -98,7 +98,7 @@ yesButton.addEventListener("click", () => {
   }
 
   // =====================================
-  // WAIT FOR LOADING ANIMATION (2.5s)
+  // WAIT FOR LOADING ANIMATION
   // =====================================
   setTimeout(() => {
     // Hide loader
@@ -113,7 +113,7 @@ yesButton.addEventListener("click", () => {
 });
 
 // =========================================
-// BACK BUTTON CLICK
+// BACK BUTTON
 // =========================================
 backButton.addEventListener("click", () => {
   // Stop video
@@ -121,10 +121,10 @@ backButton.addEventListener("click", () => {
   resultVideo.currentTime = 0;
   resultVideo.controls = false;
 
-  // Hide success card
+  // Hide success
   successCard.style.display = "none";
 
-  // Show question card
+  // Show question
   questionCard.style.display = "block";
 
   // Reset Yes button
@@ -144,7 +144,7 @@ backButton.addEventListener("click", () => {
 });
 
 // =========================================
-// FLOATING HEARTS FUNCTION
+// FLOATING HEARTS
 // =========================================
 function createHearts() {
   const hearts = ["❤️", "💖", "💕", "💗", "💓", "💞"];
