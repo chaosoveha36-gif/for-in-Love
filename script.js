@@ -1,257 +1,115 @@
+// =========================================
+// ELEMENTS
+// =========================================
 
-const questionContainer =
-  document.querySelector(".question-container");
+const celebrateBtn =
+  document.getElementById("celebrateBtn");
 
-const resultContainer =
-  document.querySelector(".result-container");
-
-const gifResult =
-  document.querySelector(".gif-result");
-
-const heartLoader =
-  document.querySelector(".cssload-main");
-
-const yesBtn =
-  document.querySelector(".js-yes-btn");
-
-const noBtn =
-  document.querySelector(".js-no-btn");
+const birthdayMessage =
+  document.getElementById("birthdayMessage");
 
 
 // =========================================
-// NO BUTTON
+// CELEBRATE BUTTON
 // =========================================
 
-const noMessages = [
-  "No 😢",
-  "Are you sure? 🥺",
-  "Really? 😭",
-  "Think again 💔",
-  "Please? 🥹",
-  "One more chance ❤️",
-  "Don't do this 😭",
-  "Try Yes 😏"
-];
+celebrateBtn.addEventListener("click", () => {
 
-let noCount = 0;
+  // Show hidden birthday message
+  birthdayMessage.style.display = "block";
 
+  // Change button
+  celebrateBtn.innerHTML =
+    "🎂 Happy Birthday! 🎉";
 
-// Desktop
-noBtn.addEventListener("mouseenter", moveNoButton);
+  celebrateBtn.disabled = true;
 
+  celebrateBtn.style.opacity = "0.8";
 
-// Mobile
-noBtn.addEventListener("touchstart", (event) => {
-
-  event.preventDefault();
-
-  moveNoButton();
-
-});
-
-
-function moveNoButton() {
-
-  noCount++;
-
-  // Change button text
-  noBtn.textContent =
-    noMessages[noCount % noMessages.length];
-
-
-  // Make YES button slightly bigger
-  const yesScale =
-    Math.min(1 + noCount * 0.04, 1.35);
-
-  yesBtn.style.transform =
-    `scale(${yesScale})`;
-
-
-  // Screen padding
-  const padding = 15;
-
-
-  // Available screen size
-  const maxX =
-    window.innerWidth -
-    noBtn.offsetWidth -
-    padding;
-
-  const maxY =
-    window.innerHeight -
-    noBtn.offsetHeight -
-    padding;
-
-
-  // Random position
-  const randomX =
-    Math.floor(
-      Math.random() *
-      Math.max(maxX, padding)
-    );
-
-  const randomY =
-    Math.floor(
-      Math.random() *
-      Math.max(maxY, padding)
-    );
-
-
-  // Move button
-  noBtn.style.position = "fixed";
-
-  noBtn.style.left =
-    `${randomX}px`;
-
-  noBtn.style.top =
-    `${randomY}px`;
-
-
-  // Random rotation
-  const rotation =
-    Math.floor(
-      Math.random() * 20
-    ) - 10;
-
-  noBtn.style.transform =
-    `rotate(${rotation}deg)`;
-}
-
-
-// =========================================
-// YES BUTTON
-// =========================================
-
-yesBtn.addEventListener("click", () => {
-
-  // Disable buttons
-  yesBtn.disabled = true;
-  noBtn.disabled = true;
-
-
-  // Hide question
-  questionContainer.style.display = "none";
-
-
-  // Show heart loader
-  heartLoader.style.display = "block";
-
-
-  // Wait 3 seconds
-  setTimeout(() => {
-
-    // Hide loader
-    heartLoader.style.display = "none";
-
-
-    // Show result
-    resultContainer.style.display = "block";
-
-
-    // Play Love.mp4
-    gifResult.currentTime = 0;
-
-    gifResult.play().catch(() => {
-      console.log("Video autoplay was blocked.");
-    });
-
-
-    // Create hearts
-    createSuccessHearts();
-
-  }, 3000);
+  // Create confetti
+  createConfetti();
 
 });
 
 
 // =========================================
-// CREATE SUCCESS HEARTS
+// CONFETTI
 // =========================================
 
-function createSuccessHearts() {
+function createConfetti() {
 
-  const heartTypes = [
-    "❤️",
-    "💖",
-    "💕",
-    "💗",
-    "💓",
-    "💞"
-  ];
+  const pieces = 120;
 
+  for (let i = 0; i < pieces; i++) {
 
-  for (let i = 0; i < 35; i++) {
-
-    const heart =
+    const confetti =
       document.createElement("div");
 
-    heart.className =
-      "floating-heart";
+    confetti.className =
+      "confetti";
 
 
-    // Random heart
-    heart.textContent =
-      heartTypes[
-        Math.floor(
-          Math.random() *
-          heartTypes.length
-        )
-      ];
+    // Random horizontal position
 
-
-    // Random position
-    heart.style.left =
+    confetti.style.left =
       Math.random() * 100 + "vw";
 
 
     // Random size
-    heart.style.fontSize =
-      18 +
-      Math.random() * 30 +
-      "px";
+
+    const size =
+      Math.random() * 8 + 6;
+
+    confetti.style.width =
+      size + "px";
+
+    confetti.style.height =
+      size * 1.5 + "px";
 
 
-    // Random animation speed
-    heart.style.animationDuration =
+    // Random color
+
+    const colors = [
+      "#ff6b9a",
+      "#ffd27d",
+      "#ffffff",
+      "#c77dff",
+      "#7dd3fc",
+      "#86efac"
+    ];
+
+    confetti.style.background =
+      colors[
+        Math.floor(
+          Math.random() * colors.length
+        )
+      ];
+
+
+    // Random animation
+
+    confetti.style.animationDuration =
       2 +
       Math.random() * 3 +
       "s";
 
 
-    // Random delay
-    heart.style.animationDelay =
+    confetti.style.animationDelay =
       Math.random() * 1.5 +
       "s";
 
 
-    document.body.appendChild(heart);
+    document.body.appendChild(confetti);
 
 
-    // Remove after animation
+    // Remove
+
     setTimeout(() => {
 
-      heart.remove();
+      confetti.remove();
 
     }, 6000);
 
   }
 
 }
-
-
-// =========================================
-// RESET NO BUTTON ON RESIZE
-// =========================================
-
-window.addEventListener("resize", () => {
-
-  noBtn.style.position = "";
-
-  noBtn.style.left = "";
-
-  noBtn.style.top = "";
-
-  noBtn.style.transform = "";
-
-});
-
