@@ -1,3 +1,60 @@
+yesButton.addEventListener("click", () => {
+
+  // Disable buttons
+  yesButton.disabled = true;
+  noButton.disabled = true;
+
+  // Hide question
+  questionCard.style.display = "none";
+
+  // Show loader
+  loader.style.display = "flex";
+
+  // =====================================
+  // START VIDEO IMMEDIATELY
+  // =====================================
+
+  resultVideo.pause();
+  resultVideo.currentTime = 0;
+
+  // Turn sound ON
+  resultVideo.muted = false;
+  resultVideo.volume = 1.0;
+
+  // Start video immediately from user's click
+  const playPromise = resultVideo.play();
+
+  if (playPromise !== undefined) {
+    playPromise
+      .then(() => {
+        console.log("Video + Sound started successfully ❤️");
+      })
+      .catch((error) => {
+        console.error("Video playback error:", error);
+
+        // Show controls if browser blocks playback
+        resultVideo.controls = true;
+      });
+  }
+
+  // =====================================
+  // WAIT FOR LOADING ANIMATION
+  // =====================================
+
+  setTimeout(() => {
+
+    // Hide loader
+    loader.style.display = "none";
+
+    // Show result
+    successCard.style.display = "block";
+
+    // Create hearts
+    createHearts();
+
+  }, 2500);
+
+});
 // =========================================
 // ELEMENTS
 // =========================================
