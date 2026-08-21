@@ -1,4 +1,7 @@
 
+// =========================================
+// ELEMENTS
+// =========================================
 
 const questionCard =
   document.querySelector(".question-card");
