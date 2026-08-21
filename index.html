@@ -1,44 +1,217 @@
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
-      rel="stylesheet" />
-    <link rel="stylesheet" href="style.css" />
-    <title>Do you love me? | CodeTap</title>
-    <!-- App favicon -->
-    <link rel="apple-touch-icon" href="https://codetap.org/assets/img/favicon.png">
-    <link rel="icon" type="image/png" href="https://codetap.org/assets/img/favicon.png">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <title>Do You Love Me? ❤️</title>
+
+  <!-- Favicon -->
+  <link
+    rel="apple-touch-icon"
+    href="https://codetap.org/assets/img/favicon.png"
+  >
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="https://codetap.org/assets/img/favicon.png"
+  >
 </head>
+
 <body>
 
-<div class="question-container container">
-<video class="local-gif" src="202602011711 (3).mp4" autoplay muted loop></video>
-  <h1 class="question">Do you love me? <br> Van Srey Keav</h1>
-
-  <div class="button-container">
-    <button class="yes-btn btn js-yes-btn">Yes</button>
-    <button class="no-btn btn js-no-btn">No</button>
+  <!-- Background Hearts -->
+  <div class="background-hearts">
+    <span>❤️</span>
+    <span>💕</span>
+    <span>💗</span>
+    <span>💖</span>
+    <span>💓</span>
+    <span>❤️</span>
+    <span>💕</span>
   </div>
-</div>
-<div class="result-container container">
-  <video class="gif-result" src="Love.mp4" autoplay loop></video>
-  <h2>I knew you Srey Keav 🫢!</h2>
-</div>
 
-<div class="cssload-main">
-  <div class="cssload-heart">
-    <span class="cssload-heartL"></span>
-    <span class="cssload-heartR"></span>
-    <span class="cssload-square"></span>
+
+  <!-- =========================
+       QUESTION SECTION
+  ========================== -->
+
+  <div class="question-container container">
+
+    <div class="love-card">
+
+      <!-- Video -->
+      <div class="video-wrapper">
+
+        <video
+          class="local-gif"
+          src="202602011711 (3).mp4"
+          autoplay
+          muted
+          loop
+          playsinline
+        ></video>
+
+      </div>
+
+
+      <!-- Heart -->
+      <div class="main-heart">
+        ❤️
+      </div>
+
+
+      <!-- Small Text -->
+      <p class="question-label">
+        I have a question for you...
+      </p>
+
+
+      <!-- Question -->
+      <h1 class="question">
+
+        Do you love me?
+
+        <span>
+          Van Srey Keav 💕
+        </span>
+
+      </h1>
+
+
+      <!-- Description -->
+      <p class="question-description">
+        Please answer honestly... 🥺
+      </p>
+
+
+      <!-- Buttons -->
+      <div class="button-container">
+
+        <button
+          class="yes-btn btn js-yes-btn"
+        >
+          ❤️ Yes
+        </button>
+
+        <button
+          class="no-btn btn js-no-btn"
+        >
+          No 😢
+        </button>
+
+      </div>
+
+
+      <p class="bottom-text">
+        Choose carefully... 😏
+      </p>
+
+    </div>
+
   </div>
-  <div class="cssload-shadow"></div>
-</div>
-<script src="script.js"></script>
+
+
+
+  <!-- =========================
+       RESULT SECTION
+  ========================== -->
+
+  <div class="result-container container">
+
+    <div class="result-card">
+
+      <!-- Result Video -->
+      <div class="result-video-wrapper">
+
+        <video
+          class="gif-result"
+          src="Love.mp4"
+          autoplay
+          loop
+          muted
+          playsinline
+        ></video>
+
+      </div>
+
+
+      <!-- Big Heart -->
+      <div class="result-heart">
+        💖
+      </div>
+
+
+      <!-- Result Title -->
+      <h2>
+        I knew you would say YES! 🫢
+      </h2>
+
+
+      <!-- Message -->
+      <p class="result-message">
+        You just made my heart very happy ❤️
+      </p>
+
+
+      <div class="forever">
+        Forever & Always 💕
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =========================
+       HEART LOADER
+  ========================== -->
+
+  <div class="cssload-main">
+
+    <div class="cssload-heart">
+
+      <span class="cssload-heartL"></span>
+
+      <span class="cssload-heartR"></span>
+
+      <span class="cssload-square"></span>
+
+    </div>
+
+    <div class="cssload-shadow"></div>
+
+    <p class="loading-text">
+      Loading love...
+    </p>
+
+  </div>
+
+
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
 
 </body>
+
 </html>
