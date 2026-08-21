@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +19,7 @@
 
   <title>For Van Srey Keav ❤️</title>
 
-  <!-- Google Fonts -->
+  <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -31,56 +34,35 @@
 
 <body>
 
-  <!-- =========================================
-       BACKGROUND
-  ========================================== -->
-
+  <!-- Background -->
   <div class="background">
-
     <div class="gradient gradient-1"></div>
-
     <div class="gradient gradient-2"></div>
-
     <div class="noise"></div>
+  </div>
 
+  <!-- Floating hearts -->
+  <div class="floating-hearts" aria-hidden="true">
+    <span>♡</span>
+    <span>♡</span>
+    <span>♡</span>
+    <span>♡</span>
+    <span>♡</span>
   </div>
 
 
-  <!-- =========================================
-       FLOATING BACKGROUND HEARTS
-  ========================================== -->
-
-  <div
-    class="floating-hearts"
-    aria-hidden="true"
-  >
-
-    <span>♡</span>
-    <span>♡</span>
-    <span>♡</span>
-    <span>♡</span>
-    <span>♡</span>
-
-  </div>
-
-
-  <!-- =========================================
-       MAIN PAGE
-  ========================================== -->
+  <!-- ==============================
+       QUESTION
+  =============================== -->
 
   <main class="page">
-
-
-    <!-- =======================================
-         QUESTION CARD
-    ======================================== -->
 
     <section
       class="card question-card"
       aria-label="Love question"
     >
 
-      <!-- Video -->
+      <!-- Media -->
       <div class="media">
 
         <video
@@ -90,66 +72,46 @@
           muted
           loop
           playsinline
-          preload="auto"
         ></video>
 
       </div>
 
 
       <!-- Heart -->
-      <div class="heart">
-        ♥
-      </div>
+      <div class="heart">♥</div>
 
 
-      <!-- Small title -->
       <p class="eyebrow">
         A little question for you
       </p>
 
 
-      <!-- Main title -->
       <h1>
         Do you love me?
       </h1>
 
 
-      <!-- Name -->
       <h2>
-       
+        Van Srey Keav
       </h2>
 
 
-      <!-- Description -->
       <p class="description">
-
         There is only one question...
         <br>
-
         but your answer means a lot. ❤️
-
       </p>
 
 
-      <!-- =====================================
-           BUTTONS
-      ====================================== -->
-
+      <!-- Buttons -->
       <div class="actions">
 
         <button
           class="button button-yes js-yes"
           type="button"
         >
-
-          <span>
-            Yes
-          </span>
-
-          <span>
-            ♥
-          </span>
-
+          <span>Yes</span>
+          <span>♥</span>
         </button>
 
 
@@ -157,15 +119,8 @@
           class="button button-no js-no"
           type="button"
         >
-
-          <span>
-            No
-          </span>
-
-          <span>
-            ×
-          </span>
-
+          <span>No</span>
+          <span>×</span>
         </button>
 
       </div>
@@ -178,90 +133,60 @@
     </section>
 
 
+<!-- ==============================
+     SUCCESS
+=============================== -->
 
-    <!-- =======================================
-         SUCCESS CARD
-    ======================================== -->
+<section
+  class="card success-card"
+  aria-label="Love result"
+>
 
-    <section
-      class="card success-card"
-      aria-label="Love result"
-    >
+  <div class="media success-media">
 
-      <!-- Result Video -->
-
-      <div class="media success-media">
-<video
+   <video
   class="result-video"
   src="Love.mp4"
   loop
   playsinline
-  preload="auto"
 ></video>
 
-      </div>
+  </div>
 
+  <div class="success-heart">
+    ♥
+  </div>
 
-      <!-- Heart -->
+  <p class="eyebrow">
+    I knew it...
+  </p>
 
-      <div class="success-heart">
-        ♥
-      </div>
+  <h1>
+    You said YES! 🫢
+  </h1>
 
+  <p class="description">
+    You just made this moment
+    <br>
+    a little more special. ❤️
+  </p>
 
-      <!-- Eyebrow -->
+  <div class="love-badge">
+    Forever & Always ❤️
+  </div>
 
-      <p class="eyebrow">
-        I knew it...
-      </p>
+  <!-- Back Button -->
+  <button
+    class="back-button js-back"
+    type="button"
+  >
+    ↩ Back
+  </button>
 
-
-      <!-- Success title -->
-
-      <h1>
-        You said YES! 🫢
-      </h1>
-
-
-      <!-- Description -->
-
-      <p class="description">
-
-        You just made this moment
-        <br>
-
-        a little more special. ❤️
-
-      </p>
-
-
-      <!-- Badge -->
-
-      <div class="love-badge">
-        Forever & Always ❤️
-      </div>
-
-
-      <!-- Back -->
-
-      <button
-        class="back-button js-back"
-        type="button"
-      >
-
-        ↩ Back
-
-      </button>
-
-    </section>
-
-  </main>
-
-
-
-  <!-- =========================================
-       LOADER
-  ========================================== -->
+</section>
+  <!-- ==============================
+       LOADING
+  =============================== -->
 
   <div
     class="loader"
@@ -279,13 +204,10 @@
   </div>
 
 
-
-  <!-- =========================================
-       JAVASCRIPT
-  ========================================== -->
-
+  <!-- JavaScript -->
   <script src="script.js"></script>
 
 </body>
 
 </html>
+
