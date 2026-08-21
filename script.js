@@ -1,36 +1,38 @@
 
+// =========================================
+// ELEMENTS
+// =========================================
 
-const questionContainer =
-  document.querySelector(".question-container");
+const questionCard =
+  document.querySelector(".question-card");
 
-const resultContainer =
-  document.querySelector(".result-container");
+const successCard =
+  document.querySelector(".success-card");
 
-const gifResult =
-  document.querySelector(".gif-result");
+const loader =
+  document.querySelector(".loader");
 
-const heartLoader =
-  document.querySelector(".cssload-main");
+const yesButton =
+  document.querySelector(".js-yes");
 
-const yesBtn =
-  document.querySelector(".js-yes-btn");
+const noButton =
+  document.querySelector(".js-no");
 
-const noBtn =
-  document.querySelector(".js-no-btn");
+const resultVideo =
+  document.querySelector(".result-video");
 
 
 // =========================================
 // NO BUTTON
 // =========================================
 
-const noMessages = [
+const noTexts = [
   "No 😢",
   "Are you sure? 🥺",
   "Really? 😭",
   "Think again 💔",
   "Please? 🥹",
   "One more chance ❤️",
-  "Don't do this 😭",
   "Try Yes 😏"
 ];
 
@@ -38,84 +40,97 @@ let noCount = 0;
 
 
 // Desktop
-noBtn.addEventListener("mouseenter", moveNoButton);
+noButton.addEventListener(
+  "mouseenter",
+  moveNoButton
+);
 
 
 // Mobile
-noBtn.addEventListener("touchstart", (event) => {
+noButton.addEventListener(
+  "touchstart",
+  (event) => {
 
-  event.preventDefault();
+    event.preventDefault();
 
-  moveNoButton();
+    moveNoButton();
 
-});
+  }
+);
 
+
+// =========================================
+// MOVE NO BUTTON
+// =========================================
 
 function moveNoButton() {
 
   noCount++;
 
-  // Change button text
-  noBtn.textContent =
-    noMessages[noCount % noMessages.length];
+
+  // Change text
+  noButton.textContent =
+    noTexts[
+      noCount % noTexts.length
+    ];
 
 
-  // Make YES button slightly bigger
-  const yesScale =
-    Math.min(1 + noCount * 0.04, 1.35);
+  // Make Yes button stronger
+  const scale =
+    Math.min(
+      1 + noCount * 0.04,
+      1.3
+    );
 
-  yesBtn.style.transform =
-    `scale(${yesScale})`;
+  yesButton.style.transform =
+    `scale(${scale})`;
 
 
-  // Screen padding
+  // Screen boundaries
   const padding = 15;
 
-
-  // Available screen size
   const maxX =
     window.innerWidth -
-    noBtn.offsetWidth -
+    noButton.offsetWidth -
     padding;
 
   const maxY =
     window.innerHeight -
-    noBtn.offsetHeight -
+    noButton.offsetHeight -
     padding;
 
 
   // Random position
-  const randomX =
+  const x =
     Math.floor(
       Math.random() *
       Math.max(maxX, padding)
     );
 
-  const randomY =
+  const y =
     Math.floor(
       Math.random() *
       Math.max(maxY, padding)
     );
 
 
-  // Move button
-  noBtn.style.position = "fixed";
+  noButton.style.position = "fixed";
 
-  noBtn.style.left =
-    `${randomX}px`;
+  noButton.style.left =
+    `${x}px`;
 
-  noBtn.style.top =
-    `${randomY}px`;
+  noButton.style.top =
+    `${y}px`;
 
 
   // Random rotation
-  const rotation =
+  const rotate =
     Math.floor(
       Math.random() * 20
     ) - 10;
 
-  noBtn.style.transform =
-    `rotate(${rotation}deg)`;
+  noButton.style.transform =
+    `rotate(${rotate}deg)`;
 }
 
 
@@ -123,55 +138,66 @@ function moveNoButton() {
 // YES BUTTON
 // =========================================
 
-yesBtn.addEventListener("click", () => {
+yesButton.addEventListener(
+  "click",
+  () => {
 
-  // Disable buttons
-  yesBtn.disabled = true;
-  noBtn.disabled = true;
-
-
-  // Hide question
-  questionContainer.style.display = "none";
+    // Disable buttons
+    yesButton.disabled = true;
+    noButton.disabled = true;
 
 
-  // Show heart loader
-  heartLoader.style.display = "block";
+    // Hide question
+    questionCard.style.display =
+      "none";
 
 
-  // Wait 3 seconds
-  setTimeout(() => {
-
-    // Hide loader
-    heartLoader.style.display = "none";
+    // Show loader
+    loader.style.display =
+      "flex";
 
 
-    // Show result
-    resultContainer.style.display = "block";
+    // Wait
+    setTimeout(() => {
+
+      // Hide loader
+      loader.style.display =
+        "none";
 
 
-    // Play Love.mp4
-    gifResult.currentTime = 0;
-
-    gifResult.play().catch(() => {
-      console.log("Video autoplay was blocked.");
-    });
+      // Show success
+      successCard.style.display =
+        "block";
 
 
-    // Create hearts
-    createSuccessHearts();
+      // Play result video
+      resultVideo.currentTime = 0;
 
-  }, 3000);
+      resultVideo
+        .play()
+        .catch(() => {
+          console.log(
+            "Video autoplay blocked."
+          );
+        });
 
-});
+
+      // Hearts
+      createHearts();
+
+    }, 2500);
+
+  }
+);
 
 
 // =========================================
-// CREATE SUCCESS HEARTS
+// CREATE HEARTS
 // =========================================
 
-function createSuccessHearts() {
+function createHearts() {
 
-  const heartTypes = [
+  const hearts = [
     "❤️",
     "💖",
     "💕",
@@ -186,49 +212,45 @@ function createSuccessHearts() {
     const heart =
       document.createElement("div");
 
+
     heart.className =
-      "floating-heart";
+      "success-heart-float";
 
 
-    // Random heart
     heart.textContent =
-      heartTypes[
+      hearts[
         Math.floor(
           Math.random() *
-          heartTypes.length
+          hearts.length
         )
       ];
 
 
-    // Random position
+    // Position
     heart.style.left =
       Math.random() * 100 + "vw";
 
 
-    // Random size
+    // Size
     heart.style.fontSize =
-      18 +
-      Math.random() * 30 +
-      "px";
+      `${18 + Math.random() * 25}px`;
 
 
-    // Random animation speed
+    // Speed
     heart.style.animationDuration =
-      2 +
-      Math.random() * 3 +
-      "s";
+      `${2.5 + Math.random() * 2.5}s`;
 
 
-    // Random delay
+    // Delay
     heart.style.animationDelay =
-      Math.random() * 1.5 +
-      "s";
+      `${Math.random() * 1.5}s`;
 
 
-    document.body.appendChild(heart);
+    document.body.appendChild(
+      heart
+    );
 
 
-    // Remove after animation
     setTimeout(() => {
 
       heart.remove();
@@ -236,23 +258,25 @@ function createSuccessHearts() {
     }, 6000);
 
   }
-
 }
 
 
 // =========================================
-// RESET NO BUTTON ON RESIZE
+// WINDOW RESIZE
 // =========================================
 
-window.addEventListener("resize", () => {
+window.addEventListener(
+  "resize",
+  () => {
 
-  noBtn.style.position = "";
+    noButton.style.position = "";
 
-  noBtn.style.left = "";
+    noButton.style.left = "";
 
-  noBtn.style.top = "";
+    noButton.style.top = "";
 
-  noBtn.style.transform = "";
+    noButton.style.transform = "";
 
-});
-
+  }
+);
+  
