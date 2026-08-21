@@ -1,3 +1,60 @@
+yesButton.addEventListener("click", () => {
+
+  // Disable buttons
+  yesButton.disabled = true;
+  noButton.disabled = true;
+
+  // Hide question
+  questionCard.style.display = "none";
+
+  // Show loader
+  loader.style.display = "flex";
+
+  // =====================================
+  // START VIDEO IMMEDIATELY
+  // =====================================
+
+  resultVideo.pause();
+  resultVideo.currentTime = 0;
+
+  // Turn sound ON
+  resultVideo.muted = false;
+  resultVideo.volume = 1.0;
+
+  // Start video immediately from user's click
+  const playPromise = resultVideo.play();
+
+  if (playPromise !== undefined) {
+    playPromise
+      .then(() => {
+        console.log("Video + Sound started successfully ❤️");
+      })
+      .catch((error) => {
+        console.error("Video playback error:", error);
+
+        // Show controls if browser blocks playback
+        resultVideo.controls = true;
+      });
+  }
+
+  // =====================================
+  // WAIT FOR LOADING ANIMATION
+  // =====================================
+
+  setTimeout(() => {
+
+    // Hide loader
+    loader.style.display = "none";
+
+    // Show result
+    successCard.style.display = "block";
+
+    // Create hearts
+    createHearts();
+
+  }, 2500);
+
+});
 // =========================================
 // ELEMENTS
 // =========================================
@@ -17,53 +74,400 @@ const yesButton =
 const noButton =
   document.querySelector(".js-no");
 
-const backButton =
-  document.querySelector(".js-back");
-
 const resultVideo =
   document.querySelector(".result-video");
 
+const backButton =
+  document.querySelector(".js-back");
+
 
 // =========================================
-// NO BUTTON TEXT
+// NO BUTTON
 // =========================================
 
 const noTexts = [
-
   "No 😢",
-
   "Are you sure? 🥺",
-
   "Really? 😭",
-
   "Think again 💔",
-
   "Please? 🥹",
-
   "One more chance ❤️",
-
   "Try Yes 😏"
-
 ];
-
 
 let noCount = 0;
 
 
-// =========================================
-// NO BUTTON - DESKTOP
-// =========================================
-
+// Desktop
 noButton.addEventListener(
   "mouseenter",
   moveNoButton
 );
 
 
+// Mobile
+noButton.addEventListener(
+  "touchstart",
+  (event) => {
+
+    event.preventDefault();
+
+    moveNoButton();
+
+  }
+);
+
+
 // =========================================
-// NO BUTTON - MOBILE
+// MOVE NO BUTTON
 // =========================================
 
+function moveNoButton() {
+
+  noCount++;
+
+  noButton.textContent =
+    noTexts[
+      noCount % noTexts.length
+    ];
+
+
+  // Make YES button bigger
+  const scale =
+    Math.min(
+      1 + noCount * 0.04,
+      1.3
+    );
+
+  yesButton.style.transform =
+    `scale(${scale})`;
+
+
+  const padding = 15;
+
+
+  const maxX =
+    window.innerWidth -
+    noButton.offsetWidth -
+    padding;
+
+
+  const maxY =
+    window.innerHeight -
+    noButton.offsetHeight -
+    padding;
+
+
+  const x =
+    Math.floor(
+      Math.random() *
+      Math.max(maxX, padding)
+    );
+
+
+  const y =
+    Math.floor(
+      Math.random() *
+      Math.max(maxY, padding)
+    );
+
+
+  noButton.style.position =
+    "fixed";
+
+  noButton.style.left =
+    `${x}px`;
+
+  noButton.style.top =
+    `${y}px`;
+
+
+  const rotate =
+    Math.floor(
+      Math.random() * 20
+    ) - 10;
+
+  noButton.style.transform =
+    `rotate(${rotate}deg)`;
+}
+
+
+// =========================================
+// YES BUTTON
+// =========================================
+
+yesButton.addEventListener(
+  "click",
+  () => {
+
+    // Disable buttons
+    yesButton.disabled = true;
+    noButton.disabled = true;
+
+
+    // Hide question
+    questionCard.style.display =
+      "none";
+
+
+    // Show loader
+    loader.style.display =
+      "flex";
+
+
+    // Wait 2.5 seconds
+    setTimeout(() => {
+
+      // Hide loader
+      loader.style.display =
+        "none";
+
+
+      // Show success card
+      successCard.style.display =
+        "block";
+
+
+      // ==============================
+      // PLAY VIDEO WITH SOUND
+      // ==============================
+
+      resultVideo.muted = false;
+
+      resultVideo.volume = 1;
+
+      resultVideo.currentTime = 0;
+
+
+      resultVideo
+        .play()
+        .then(() => {
+
+          console.log(
+            "Love video is playing with sound ❤️"
+          );
+
+        })
+        .catch((error) => {
+
+          console.log(
+            "Could not play video:",
+            error
+          );
+
+          // If browser blocks sound,
+          // show controls so user can play it.
+          resultVideo.controls = true;
+
+        });
+
+
+      // Create floating hearts
+      createHearts();
+
+    }, 2500);
+
+  }
+);
+
+
+// =========================================
+// BACK BUTTON
+// =========================================
+
+backButton.addEventListener(
+  "click",
+  () => {
+
+    // Stop video
+    resultVideo.pause();
+
+    resultVideo.currentTime = 0;
+
+    // Hide video controls if enabled
+    resultVideo.controls = false;
+
+
+    // Hide success
+    successCard.style.display =
+      "none";
+
+
+    // Show question
+    questionCard.style.display =
+      "block";
+
+
+    // Reset Yes button
+    yesButton.disabled = false;
+
+    yesButton.style.transform =
+      "scale(1)";
+
+
+    // Reset No button
+    noButton.disabled = false;
+
+    noButton.textContent =
+      "No ×";
+
+
+    noButton.style.position =
+      "";
+
+    noButton.style.left =
+      "";
+
+    noButton.style.top =
+      "";
+
+    noButton.style.transform =
+      "";
+
+
+    // Reset counter
+    noCount = 0;
+
+  }
+);
+
+
+// =========================================
+// FLOATING HEARTS
+// =========================================
+
+function createHearts() {
+
+  const hearts = [
+    "❤️",
+    "💖",
+    "💕",
+    "💗",
+    "💓",
+    "💞"
+  ];
+
+
+  for (let i = 0; i < 35; i++) {
+
+    const heart =
+      document.createElement("div");
+
+
+    heart.className =
+      "success-heart-float";
+
+
+    heart.textContent =
+      hearts[
+        Math.floor(
+          Math.random() *
+          hearts.length
+        )
+      ];
+
+
+    // Random position
+    heart.style.left =
+      Math.random() * 100 + "vw";
+
+
+    // Random size
+    heart.style.fontSize =
+      `${18 + Math.random() * 25}px`;
+
+
+    // Random speed
+    heart.style.animationDuration =
+      `${2.5 + Math.random() * 2.5}s`;
+
+
+    // Random delay
+    heart.style.animationDelay =
+      `${Math.random() * 1.5}s`;
+
+
+    document.body.appendChild(
+      heart
+    );
+
+
+    setTimeout(() => {
+
+      heart.remove();
+
+    }, 6000);
+
+  }
+}
+
+
+// =========================================
+// RESET ON WINDOW RESIZE
+// =========================================
+
+window.addEventListener(
+  "resize",
+  () => {
+
+    noButton.style.position = "";
+
+    noButton.style.left = "";
+
+    noButton.style.top = "";
+
+    noButton.style.transform = "";
+
+  }
+);
+// =========================================
+// ELEMENTS
+// =========================================
+
+const questionCard =
+  document.querySelector(".question-card");
+
+const successCard =
+  document.querySelector(".success-card");
+
+const loader =
+  document.querySelector(".loader");
+
+const yesButton =
+  document.querySelector(".js-yes");
+
+const noButton =
+  document.querySelector(".js-no");
+
+const resultVideo =
+  document.querySelector(".result-video");
+
+
+// =========================================
+// NO BUTTON
+// =========================================
+
+const noTexts = [
+  "No 😢",
+  "Are you sure? 🥺",
+  "Really? 😭",
+  "Think again 💔",
+  "Please? 🥹",
+  "One more chance ❤️",
+  "Try Yes 😏"
+];
+
+let noCount = 0;
+
+
+// Desktop
+noButton.addEventListener(
+  "mouseenter",
+  moveNoButton
+);
+
+
+// Mobile
 noButton.addEventListener(
   "touchstart",
   (event) => {
@@ -92,28 +496,24 @@ function moveNoButton() {
     ];
 
 
-  // Make YES bigger
+  // Make Yes button stronger
   const scale =
     Math.min(
       1 + noCount * 0.04,
       1.3
     );
 
-
   yesButton.style.transform =
     `scale(${scale})`;
 
 
-  // Screen padding
+  // Screen boundaries
   const padding = 15;
 
-
-  // Maximum position
   const maxX =
     window.innerWidth -
     noButton.offsetWidth -
     padding;
-
 
   const maxY =
     window.innerHeight -
@@ -128,7 +528,6 @@ function moveNoButton() {
       Math.max(maxX, padding)
     );
 
-
   const y =
     Math.floor(
       Math.random() *
@@ -136,14 +535,10 @@ function moveNoButton() {
     );
 
 
-  // Move button
-  noButton.style.position =
-    "fixed";
-
+  noButton.style.position = "fixed";
 
   noButton.style.left =
     `${x}px`;
-
 
   noButton.style.top =
     `${y}px`;
@@ -155,10 +550,8 @@ function moveNoButton() {
       Math.random() * 20
     ) - 10;
 
-
   noButton.style.transform =
     `rotate(${rotate}deg)`;
-
 }
 
 
@@ -170,86 +563,22 @@ yesButton.addEventListener(
   "click",
   () => {
 
-    // =====================================
-    // DISABLE BUTTONS
-    // =====================================
-
+    // Disable buttons
     yesButton.disabled = true;
-
     noButton.disabled = true;
 
 
-    // =====================================
-    // PREPARE VIDEO
-    // =====================================
-
-    resultVideo.pause();
-
-    resultVideo.currentTime = 0;
-
-    resultVideo.muted = false;
-
-    resultVideo.volume = 1;
-
-
-    // =====================================
-    // START VIDEO IMMEDIATELY
-    // =====================================
-
-    const playPromise =
-      resultVideo.play();
-
-
-    if (playPromise !== undefined) {
-
-      playPromise
-        .then(() => {
-
-          console.log(
-            "❤️ Video started with sound!"
-          );
-
-        })
-        .catch((error) => {
-
-          console.error(
-            "Video playback error:",
-            error
-          );
-
-
-          /*
-            Browser may block
-            autoplay with sound.
-          */
-
-          resultVideo.controls = true;
-
-        });
-
-    }
-
-
-    // =====================================
-    // HIDE QUESTION
-    // =====================================
-
+    // Hide question
     questionCard.style.display =
       "none";
 
 
-    // =====================================
-    // SHOW LOADER
-    // =====================================
-
+    // Show loader
     loader.style.display =
       "flex";
 
 
-    // =====================================
-    // WAIT 2.5 SECONDS
-    // =====================================
-
+    // Wait
     setTimeout(() => {
 
       // Hide loader
@@ -262,7 +591,19 @@ yesButton.addEventListener(
         "block";
 
 
-      // Create hearts
+      // Play result video
+      resultVideo.currentTime = 0;
+
+      resultVideo
+        .play()
+        .catch(() => {
+          console.log(
+            "Video autoplay blocked."
+          );
+        });
+
+
+      // Hearts
       createHearts();
 
     }, 2500);
@@ -272,119 +613,22 @@ yesButton.addEventListener(
 
 
 // =========================================
-// BACK BUTTON
-// =========================================
-
-backButton.addEventListener(
-  "click",
-  () => {
-
-    // =====================================
-    // STOP VIDEO
-    // =====================================
-
-    resultVideo.pause();
-
-    resultVideo.currentTime = 0;
-
-
-    // Reset video settings
-    resultVideo.muted = false;
-
-    resultVideo.volume = 1;
-
-
-    // Hide controls
-    resultVideo.controls = false;
-
-
-    // =====================================
-    // HIDE SUCCESS
-    // =====================================
-
-    successCard.style.display =
-      "none";
-
-
-    // =====================================
-    // SHOW QUESTION
-    // =====================================
-
-    questionCard.style.display =
-      "block";
-
-
-    // =====================================
-    // RESET YES
-    // =====================================
-
-    yesButton.disabled = false;
-
-    yesButton.style.transform =
-      "scale(1)";
-
-
-    // =====================================
-    // RESET NO
-    // =====================================
-
-    noButton.disabled = false;
-
-    noButton.textContent =
-      "No ×";
-
-
-    noButton.style.position =
-      "";
-
-    noButton.style.left =
-      "";
-
-    noButton.style.top =
-      "";
-
-    noButton.style.transform =
-      "";
-
-
-    // =====================================
-    // RESET COUNTER
-    // =====================================
-
-    noCount = 0;
-
-  }
-);
-
-
-// =========================================
-// FLOATING HEARTS
+// CREATE HEARTS
 // =========================================
 
 function createHearts() {
 
   const hearts = [
-
     "❤️",
-
     "💖",
-
     "💕",
-
     "💗",
-
     "💓",
-
     "💞"
-
   ];
 
 
-  for (
-    let i = 0;
-    i < 35;
-    i++
-  ) {
+  for (let i = 0; i < 35; i++) {
 
     const heart =
       document.createElement("div");
@@ -394,7 +638,6 @@ function createHearts() {
       "success-heart-float";
 
 
-    // Random heart
     heart.textContent =
       hearts[
         Math.floor(
@@ -404,33 +647,31 @@ function createHearts() {
       ];
 
 
-    // Random horizontal position
+    // Position
     heart.style.left =
       Math.random() * 100 + "vw";
 
 
-    // Random size
+    // Size
     heart.style.fontSize =
       `${18 + Math.random() * 25}px`;
 
 
-    // Random animation speed
+    // Speed
     heart.style.animationDuration =
       `${2.5 + Math.random() * 2.5}s`;
 
 
-    // Random animation delay
+    // Delay
     heart.style.animationDelay =
       `${Math.random() * 1.5}s`;
 
 
-    // Add to page
     document.body.appendChild(
       heart
     );
 
 
-    // Remove after animation
     setTimeout(() => {
 
       heart.remove();
@@ -438,7 +679,6 @@ function createHearts() {
     }, 6000);
 
   }
-
 }
 
 
@@ -450,17 +690,875 @@ window.addEventListener(
   "resize",
   () => {
 
-    noButton.style.position =
-      "";
+    noButton.style.position = "";
 
-    noButton.style.left =
-      "";
+    noButton.style.left = "";
 
-    noButton.style.top =
-      "";
+    noButton.style.top = "";
 
-    noButton.style.transform =
-      "";
+    noButton.style.transform = "";
 
   }
 );
+
+/* =========================================
+   BACK BUTTON
+========================================= */
+
+.back-button {
+  display: block;
+
+  margin: 22px auto 0;
+
+  padding: 11px 24px;
+
+  border: 1px solid rgba(255, 255, 255, 0.8);
+
+  border-radius: 100px;
+
+  background: rgba(255, 255, 255, 0.55);
+
+  color: #5b2635;
+
+  font-family: "Quicksand", sans-serif;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.back-button:hover {
+  transform: translateY(-3px);
+
+  background: rgba(255, 255, 255, 0.9);
+
+  box-shadow:
+    0 8px 20px rgba(80, 30, 50, 0.15);
+}
+
+.back-button:active {
+  transform: scale(0.96);
+}
+/* =========================================
+   RESET
+========================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   ROOT
+========================================= */
+
+:root {
+  --pink: #ff4f81;
+  --pink-light: #ff8fab;
+  --purple: #a78bfa;
+
+  --text: #351f2a;
+  --muted: #755c67;
+
+  --glass: rgba(255, 255, 255, 0.42);
+  --border: rgba(255, 255, 255, 0.7);
+
+  --shadow:
+    0 25px 70px rgba(80, 30, 50, 0.18);
+}
+
+
+/* =========================================
+   BODY
+========================================= */
+
+body {
+  min-height: 100vh;
+
+  overflow: hidden;
+
+  font-family:
+    "Quicksand",
+    sans-serif;
+
+  color: var(--text);
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffe4ec 0%,
+      #ffd1df 45%,
+      #e9ddff 100%
+    );
+}
+
+
+/* =========================================
+   BACKGROUND
+========================================= */
+
+.background {
+  position: fixed;
+
+  inset: 0;
+
+  overflow: hidden;
+
+  z-index: -2;
+}
+
+
+.gradient {
+  position: absolute;
+
+  width: 500px;
+  height: 500px;
+
+  border-radius: 50%;
+
+  filter: blur(80px);
+
+  opacity: 0.55;
+
+  animation:
+    moveGradient 12s ease-in-out infinite alternate;
+}
+
+
+.gradient-1 {
+  top: -200px;
+  left: -150px;
+
+  background: #ff9fba;
+}
+
+
+.gradient-2 {
+  right: -150px;
+  bottom: -200px;
+
+  background: #b9a3ff;
+
+  animation-delay: 3s;
+}
+
+
+@keyframes moveGradient {
+
+  0% {
+    transform:
+      translate(0, 0)
+      scale(1);
+  }
+
+  100% {
+    transform:
+      translate(80px, 50px)
+      scale(1.2);
+  }
+}
+
+
+/* =========================================
+   NOISE
+========================================= */
+
+.noise {
+  position: absolute;
+
+  inset: 0;
+
+  opacity: 0.035;
+
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}
+
+
+/* =========================================
+   FLOATING HEARTS
+========================================= */
+
+.floating-hearts {
+  position: fixed;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  overflow: hidden;
+
+  z-index: -1;
+}
+
+
+.floating-hearts span {
+  position: absolute;
+
+  bottom: -50px;
+
+  color: white;
+
+  font-size: 35px;
+
+  opacity: 0.35;
+
+  animation:
+    float 10s linear infinite;
+}
+
+
+.floating-hearts span:nth-child(1) {
+  left: 10%;
+  animation-delay: 0s;
+}
+
+
+.floating-hearts span:nth-child(2) {
+  left: 30%;
+  animation-delay: 3s;
+}
+
+
+.floating-hearts span:nth-child(3) {
+  left: 50%;
+  animation-delay: 5s;
+}
+
+
+.floating-hearts span:nth-child(4) {
+  left: 70%;
+  animation-delay: 2s;
+}
+
+
+.floating-hearts span:nth-child(5) {
+  left: 90%;
+  animation-delay: 7s;
+}
+
+
+@keyframes float {
+
+  0% {
+    transform:
+      translateY(0)
+      rotate(0deg)
+      scale(0.6);
+
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.4;
+  }
+
+  100% {
+    transform:
+      translateY(-110vh)
+      rotate(360deg)
+      scale(1.2);
+
+    opacity: 0;
+  }
+}
+
+
+/* =========================================
+   PAGE
+========================================= */
+
+.page {
+  min-height: 100vh;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  padding: 20px;
+}
+
+
+/* =========================================
+   CARD
+========================================= */
+
+.card {
+
+  width: min(460px, 100%);
+
+  padding: 34px 30px;
+
+  text-align: center;
+
+  background: var(--glass);
+
+  border: 1px solid var(--border);
+
+  border-radius: 32px;
+
+  box-shadow: var(--shadow);
+
+  backdrop-filter: blur(24px);
+
+  -webkit-backdrop-filter: blur(24px);
+
+  animation:
+    cardIn 0.8s ease;
+}
+
+
+@keyframes cardIn {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(30px)
+      scale(0.94);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+
+/* =========================================
+   MEDIA
+========================================= */
+
+.media {
+
+  width: 190px;
+  height: 190px;
+
+  margin:
+    0 auto 20px;
+
+  padding: 6px;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      white,
+      rgba(255, 255, 255, 0.35)
+    );
+
+  box-shadow:
+    0 15px 40px rgba(255, 79, 129, 0.25);
+}
+
+
+.main-video,
+.result-video {
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+}
+
+
+.media {
+  animation:
+    mediaFloat 4s ease-in-out infinite;
+}
+
+
+@keyframes mediaFloat {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+
+/* =========================================
+   HEART
+========================================= */
+
+.heart {
+
+  font-size: 36px;
+
+  color: var(--pink);
+
+  margin-bottom: 5px;
+
+  animation:
+    heartbeat 1.2s infinite;
+}
+
+
+@keyframes heartbeat {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+
+/* =========================================
+   TYPOGRAPHY
+========================================= */
+
+.eyebrow {
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  letter-spacing: 1.5px;
+
+  text-transform: uppercase;
+
+  color: var(--muted);
+}
+
+
+h1 {
+
+  margin-top: 7px;
+
+  font-size:
+    clamp(2.3rem, 8vw, 3.2rem);
+
+  line-height: 1.1;
+
+  font-weight: 700;
+
+  letter-spacing: -1px;
+}
+
+
+h2 {
+
+  margin-top: 8px;
+
+  font-size: 1.2rem;
+
+  font-weight: 600;
+
+  color: var(--pink);
+}
+
+
+.description {
+
+  margin-top: 15px;
+
+  color: var(--muted);
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+
+/* =========================================
+   ACTIONS
+========================================= */
+
+.actions {
+
+  position: relative;
+
+  min-height: 70px;
+
+  margin-top: 22px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 15px;
+}
+
+
+/* =========================================
+   BUTTON
+========================================= */
+
+.button {
+
+  min-width: 110px;
+
+  border: none;
+
+  padding: 13px 25px;
+
+  border-radius: 100px;
+
+  font-family: inherit;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+/* YES */
+
+.button-yes {
+
+  color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ff416c,
+      #ff758c
+    );
+
+  box-shadow:
+    0 10px 25px
+    rgba(255, 65, 108, 0.35);
+}
+
+
+.button-yes:hover {
+
+  transform:
+    translateY(-3px)
+    scale(1.05);
+
+  box-shadow:
+    0 15px 30px
+    rgba(255, 65, 108, 0.45);
+}
+
+
+/* NO */
+
+.button-no {
+
+  color: #555;
+
+  background:
+    rgba(255, 255, 255, 0.8);
+
+  box-shadow:
+    0 8px 20px
+    rgba(0, 0, 0, 0.1);
+}
+
+
+.button-no:hover {
+
+  transform:
+    translateY(-3px);
+
+  background: white;
+}
+
+
+/* =========================================
+   HINT
+========================================= */
+
+.hint {
+
+  margin-top: 8px;
+
+  font-size: 12px;
+
+  color: var(--muted);
+
+  opacity: 0.7;
+}
+
+
+/* =========================================
+   SUCCESS
+========================================= */
+
+.success-card {
+
+  display: none;
+}
+
+
+.success-media {
+
+  width: 220px;
+  height: 220px;
+}
+
+
+.success-heart {
+
+  margin-top: 3px;
+
+  font-size: 42px;
+
+  color: var(--pink);
+
+  animation:
+    heartbeat 1s infinite;
+}
+
+
+.love-badge {
+
+  display: inline-block;
+
+  margin-top: 20px;
+
+  padding: 9px 18px;
+
+  border-radius: 100px;
+
+  color: var(--pink);
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  background:
+    rgba(255, 255, 255, 0.55);
+
+  border:
+    1px solid rgba(255, 255, 255, 0.7);
+}
+
+
+/* =========================================
+   LOADER
+========================================= */
+
+.loader {
+
+  display: none;
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 100;
+
+  justify-content: center;
+
+  align-items: center;
+
+  flex-direction: column;
+
+  background:
+    rgba(255, 226, 235, 0.65);
+
+  backdrop-filter: blur(15px);
+}
+
+
+.loader-heart {
+
+  font-size: 70px;
+
+  color: var(--pink);
+
+  animation:
+    loaderHeart 1s infinite;
+}
+
+
+.loader p {
+
+  margin-top: 15px;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  color: var(--pink);
+}
+
+
+@keyframes loaderHeart {
+
+  0%,
+  100% {
+    transform:
+      scale(0.8)
+      rotate(-10deg);
+  }
+
+  50% {
+    transform:
+      scale(1.2)
+      rotate(10deg);
+  }
+}
+
+
+/* =========================================
+   SUCCESS FLOATING HEART
+========================================= */
+
+.success-heart-float {
+
+  position: fixed;
+
+  bottom: -40px;
+
+  z-index: 200;
+
+  pointer-events: none;
+
+  animation:
+    successFloat 4s linear forwards;
+}
+
+
+@keyframes successFloat {
+
+  0% {
+
+    opacity: 0;
+
+    transform:
+      translateY(0)
+      scale(0.5);
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  100% {
+
+    opacity: 0;
+
+    transform:
+      translateY(-110vh)
+      rotate(360deg)
+      scale(1.4);
+  }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .page {
+    padding: 15px;
+  }
+
+
+  .card {
+
+    padding: 28px 20px;
+
+    border-radius: 26px;
+  }
+
+
+  .media {
+
+    width: 155px;
+    height: 155px;
+  }
+
+
+  h1 {
+
+    font-size: 2.2rem;
+  }
+
+
+  .actions {
+
+    gap: 10px;
+  }
+
+
+  .button {
+
+    min-width: 100px;
+
+    padding:
+      12px 20px;
+
+    font-size: 15px;
+  }
+
+
+  .success-media {
+
+    width: 180px;
+    height: 180px;
+  }
+
+}
+
+
+/* =========================================
+   SMALL PHONE
+========================================= */
+
+@media (max-width: 380px) {
+
+  .card {
+    padding: 22px 16px;
+  }
+
+
+  .media {
+
+    width: 130px;
+    height: 130px;
+  }
+
+
+  h1 {
+
+    font-size: 1.9rem;
+  }
+
+
+  .description {
+
+    font-size: 13px;
+  }
+}
