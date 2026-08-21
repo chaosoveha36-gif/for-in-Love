@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,160 +10,209 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Happy Birthday 🎂</title>
-
   <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
     rel="stylesheet"
   >
 
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
+
+  <title>Do You Love Me? ❤️</title>
+
+  <!-- Favicon -->
+  <link
+    rel="apple-touch-icon"
+    href="https://codetap.org/assets/img/favicon.png"
+  >
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="https://codetap.org/assets/img/favicon.png"
+  >
 </head>
 
 <body>
 
-  <!-- =================================
-       BACKGROUND
-  ================================== -->
+  <!-- Background Hearts -->
+  <div class="background-hearts">
+    <span>❤️</span>
+    <span>💕</span>
+    <span>💗</span>
+    <span>💖</span>
+    <span>💓</span>
+    <span>❤️</span>
+    <span>💕</span>
+  </div>
 
-  <div class="background">
 
-    <div class="stars"></div>
+  <!-- =========================
+       QUESTION SECTION
+  ========================== -->
 
-    <div class="balloon balloon-1">🎈</div>
-    <div class="balloon balloon-2">🎈</div>
-    <div class="balloon balloon-3">🎈</div>
-    <div class="balloon balloon-4">🎈</div>
-    <div class="balloon balloon-5">🎈</div>
+  <div class="question-container container">
+
+    <div class="love-card">
+
+      <!-- Video -->
+      <div class="video-wrapper">
+
+        <video
+          class="local-gif"
+          src="202602011711 (3).mp4"
+          autoplay
+          muted
+          loop
+          playsinline
+        ></video>
+
+      </div>
+
+
+      <!-- Heart -->
+      <div class="main-heart">
+        ❤️
+      </div>
+
+
+      <!-- Small Text -->
+      <p class="question-label">
+        I have a question for you...
+      </p>
+
+
+      <!-- Question -->
+      <h1 class="question">
+
+        Do you love me?
+
+        <span>
+          Van Srey Keav 💕
+        </span>
+
+      </h1>
+
+
+      <!-- Description -->
+      <p class="question-description">
+        Please answer honestly... 🥺
+      </p>
+
+
+      <!-- Buttons -->
+      <div class="button-container">
+
+        <button
+          class="yes-btn btn js-yes-btn"
+        >
+          ❤️ Yes
+        </button>
+
+        <button
+          class="no-btn btn js-no-btn"
+        >
+          No 😢
+        </button>
+
+      </div>
+
+
+      <p class="bottom-text">
+        Choose carefully... 😏
+      </p>
+
+    </div>
 
   </div>
 
 
-  <!-- =================================
-       MAIN
-  ================================== -->
 
-  <main class="birthday-container">
+  <!-- =========================
+       RESULT SECTION
+  ========================== -->
 
-    <div class="birthday-card">
+  <div class="result-container container">
 
-      <!-- Top Label -->
+    <div class="result-card">
 
-      <p class="top-label">
-        ✨ A Special Day ✨
-      </p>
+      <!-- Result Video -->
+      <div class="result-video-wrapper">
+
+        <video
+          class="gif-result"
+          src="Love.mp4"
+          autoplay
+          loop
+          muted
+          playsinline
+        ></video>
+
+      </div>
 
 
-      <!-- Birthday Title -->
-
-      <h1>
-        Happy Birthday
-      </h1>
-
-      <div class="name">
-        Van Srey Keav 🎂
+      <!-- Big Heart -->
+      <div class="result-heart">
+        💖
       </div>
 
 
-      <!-- Cake -->
-
-      <div class="cake-container">
-
-        <div class="cake">
-
-          <div class="candle">
-            <div class="flame">🔥</div>
-          </div>
-
-          <div class="cake-top"></div>
-
-          <div class="cake-body">
-
-            <span>🍓</span>
-            <span>🍓</span>
-            <span>🍓</span>
-
-          </div>
-
-        </div>
-
-      </div>
+      <!-- Result Title -->
+      <h2>
+        I knew you would say YES! 🫢
+      </h2>
 
 
       <!-- Message -->
-
-      <p class="message">
-        May your birthday be filled with
-        happiness, beautiful memories,
-        and wonderful moments. 💖
+      <p class="result-message">
+        You just made my heart very happy ❤️
       </p>
 
 
-      <p class="wish">
-        Wishing you all the best today
-        and always! ✨
-      </p>
-
-
-      <!-- Button -->
-
-      <button
-        id="celebrateBtn"
-        class="celebrate-btn"
-      >
-        🎉 Celebrate
-      </button>
-
-
-      <!-- Hidden Message -->
-
-      <div
-        id="birthdayMessage"
-        class="birthday-message"
-      >
-
-        <div class="gift">
-          🎁
-        </div>
-
-        <h2>
-          This day is all about you! 💖
-        </h2>
-
-        <p>
-          Keep smiling, keep dreaming,
-          and enjoy every beautiful moment
-          of your special day. 🎂✨
-        </p>
-
-        <div class="signature">
-          With lots of love ❤️
-        </div>
-
+      <div class="forever">
+        Forever & Always 💕
       </div>
 
     </div>
 
-  </main>
+  </div>
 
 
-  <!-- =================================
-       FOOTER
-  ================================== -->
 
-  <footer>
-    Made with ❤️ for a special birthday
-  </footer>
+  <!-- =========================
+       HEART LOADER
+  ========================== -->
+
+  <div class="cssload-main">
+
+    <div class="cssload-heart">
+
+      <span class="cssload-heartL"></span>
+
+      <span class="cssload-heartR"></span>
+
+      <span class="cssload-square"></span>
+
+    </div>
+
+    <div class="cssload-shadow"></div>
+
+    <p class="loading-text">
+      Loading love...
+    </p>
+
+  </div>
 
 
-  <!-- JS -->
 
+  <!-- JavaScript -->
   <script src="script.js"></script>
 
 </body>
 
 </html>
+
